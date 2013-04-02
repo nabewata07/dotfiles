@@ -472,7 +472,7 @@ Bundle 'https://github.com/Shougo/vimproc'
 Bundle 'thinca/vim-quickrun'
 "Bundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
 Bundle 'https://github.com/Shougo/neosnippet'
-Bundle 'BlackSea.vim'
+Bundle 'https://github.com/vim-scripts/BlackSea.git'
 "Bundle 'https://github.com/Townk/vim-autoclose.git'
 
 "
