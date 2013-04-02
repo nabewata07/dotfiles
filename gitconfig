@@ -1,0 +1,23 @@
+[user]
+  name = nabewata
+  email = channel.momo@gmail.com
+[color]
+  diff = auto
+  ui = true
+[alias]
+  st = status -sb
+  pr = pull -rebase
+  co = checkout
+  fo = fetch origin
+  ro = rebase origin
+  dw = diff --word-diff
+  lg = log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches
+  lp = log -p
+  ls = log --stat
+  ba = branch -a
+  p = pull
+  b = branch
+  l = log
+  d = diff
+  a = add -p
+  c = commit -v
