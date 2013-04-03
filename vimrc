@@ -97,8 +97,14 @@ set textwidth=0
 set wrap
 
 " 全角スペースの表示
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-match ZenkakuSpace /　/
+"highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+"match ZenkakuSpace /　/
+
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\(\s\+$\|　\)/
+augroup END
 
 colorscheme BlackSea
 
