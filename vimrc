@@ -84,7 +84,9 @@ set matchtime=2
 " シンタックスハイライトを有効にする
 syntax on
 " 検索結果文字列のハイライトを有効にする
-"set hlsearch
+set hlsearch
+" Esc Esc でハイライトOFF
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
 " コメント文の色を変更
 highlight Comment ctermfg=Darkcyan
 " コマンドライン補完を拡張モードにする
@@ -205,6 +207,9 @@ au Filetype smarty set complete+=k
 "rspec シンタックスの設定
 au BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec 
 au Filetype ruby exec('set dictionary=$HOME/.vim/syntax/rspec.vim')
+
+"au Filetype php let g:neocomplcache_enable_at_startup = 0
+
 "----------------------------------------------------
 " その他
 "----------------------------------------------------
@@ -449,18 +454,17 @@ call vundle#rc()
 " let Vundle manage Vundle
 " required! 
 "Bundle 'gmarik/vundle'
-Bundle 'git://github.com/gmarik/vundle.git'
+"Bundle 'git://github.com/gmarik/vundle.git'
 
 " My Bundles here:
-Bundle 'unite.vim'
+"Bundle 'unite.vim'
 Bundle 'unite-yarm'
 Bundle 'unite-gem'
 Bundle 'unite-locate'
 Bundle 'unite-font'
 Bundle 'unite-colorscheme'
-Bundle 'neocomplcache'
+"Bundle 'neocomplcache'
 Bundle 'surround.vim'
-"Bundle 'git://github.com/Rykka/ColorV.git'
 Bundle 'git://github.com/Rykka/colorv.vim.git'
 Bundle 'git://github.com/pasela/unite-webcolorname.git'
 Bundle 'git://github.com/thinca/vim-quickrun.git'
@@ -470,10 +474,10 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'git://github.com/digitaltoad/vim-jade.git'
 Bundle 'https://github.com/Shougo/vimproc'
 Bundle 'thinca/vim-quickrun'
-"Bundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
-Bundle 'https://github.com/Shougo/neosnippet'
+Bundle 'https://github.com/Shougo/neosnippet.git'
 Bundle 'https://github.com/vim-scripts/BlackSea.git'
-"Bundle 'https://github.com/Townk/vim-autoclose.git'
+Bundle 'https://github.com/scrooloose/nerdtree.git'
+Bundle 'https://github.com/vim-scripts/sudo.vim.git'
 
 "
 " original repos on github
@@ -563,12 +567,12 @@ imap <C-s>  <Plug>(neocomplcache_start_unite_snippet)
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
