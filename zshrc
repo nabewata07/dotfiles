@@ -180,8 +180,9 @@ setopt interactive_comments  # コマンドラインでも # 以降をコメン�
 
 # aliases
 alias ll="/bin/ls"
-alias ls="ls -GFla"
+#alias ls="ls -GFla"
 #alias ls="ls -la"
+alias ls="ll -al --show-control-chars --color=auto -F"
 alias jobs='jobs -l'
 alias sc='screen'
 
@@ -237,8 +238,6 @@ bindkey -e
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 #[[ -s "/usr/local/rvm/scripts/rvm" ]] && . "/usr/local/rvm/scripts/rvm"
 #
-#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:/Users/nabewata/.rbenv/versions/1.9.3-p327/bin
 #
 ## 独自環境用拡張
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
@@ -246,3 +245,5 @@ PATH=$PATH:/Users/nabewata/.rbenv/versions/1.9.3-p327/bin
 . ~/nvm/nvm.sh
 nvm use v0.8.12
 eval "$(rbenv init -)"
+PATH=/usr/local/*/bin:$PATH
+
