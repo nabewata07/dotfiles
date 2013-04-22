@@ -245,5 +245,5 @@ bindkey -e
 . ~/nvm/nvm.sh
 nvm use v0.8.12
 eval "$(rbenv init -)"
-PATH=/usr/local/*/bin:$PATH
+PATH=/usr/local/vim-7.3/bin:/usr/local/tmux/bin:$PATH
 
