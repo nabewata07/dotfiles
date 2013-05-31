@@ -180,8 +180,7 @@ setopt interactive_comments  # コマンドラインでも # 以降をコメン�
 
 # aliases
 alias ll="/bin/ls"
-alias ls="ls -GFla"
-#alias ls="ls -la"
+alias ls="ll -al --show-control-chars --color=auto -F"
 alias jobs='jobs -l'
 alias sc='screen'
 
@@ -243,6 +242,6 @@ PATH=$PATH:/Users/nabewata/.rbenv/versions/1.9.3-p327/bin
 ## 独自環境用拡張
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
 ## 起動時にnvm起動
-. ~/nvm/nvm.sh
-nvm use v0.8.12
-eval "$(rbenv init -)"
+. ~/.nvm/nvm.sh
+#nvm use v0.11.2
+#eval "$(rbenv init -)"
