@@ -5,7 +5,7 @@
   diff = auto
   ui = true
 [alias]
-  st = status -sb
+  st = status -s
   pr = pull -rebase
   co = checkout
   fo = fetch origin
