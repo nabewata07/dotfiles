@@ -237,11 +237,13 @@ bindkey -e
 #[[ -s "/usr/local/rvm/scripts/rvm" ]] && . "/usr/local/rvm/scripts/rvm"
 #
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:/Users/nabewata/.rbenv/versions/1.9.3-p327/bin
+#PATH=$PATH:/Users/nabewata/.rbenv/versions/1.9.3-p327/bin
 #
 ## 独自環境用拡張
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
 ## 起動時にnvm起動
-. ~/.nvm/nvm.sh
+#. ~/.nvm/nvm.sh
 #nvm use v0.11.2
-#eval "$(rbenv init -)"
+export RBENV_ROOT=/usr/local/rbenv
+export PATH="$RBENV_ROOT/bin:$PATH"
+eval "$(rbenv init -)"
