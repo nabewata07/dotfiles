@@ -183,6 +183,7 @@ alias ll="/bin/ls"
 alias ls="ll -al --show-control-chars --color=auto -F"
 alias jobs='jobs -l'
 alias sc='screen'
+alias sudo='sudo env PATH=$PATH'
 
 
 # .zshfunctions
@@ -242,8 +243,8 @@ bindkey -e
 ## 独自環境用拡張
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
 ## 起動時にnvm起動
-#. ~/.nvm/nvm.sh
-#nvm use v0.11.2
+. ~/.nvm/nvm.sh
+nvm use v0.11.2
 export RBENV_ROOT=/usr/local/rbenv
 export PATH="$RBENV_ROOT/bin:$PATH"
 eval "$(rbenv init -)"
