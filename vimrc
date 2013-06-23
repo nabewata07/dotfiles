@@ -72,7 +72,7 @@ set title
 " ルーラーを表示
 set ruler
 " タブ文字を CTRL-I で表示し、行末に $ で表示する
-set list
+set nolist
 " 入力中のコマンドをステータスに表示する
 set showcmd
 " ステータスラインを常に表示
@@ -681,3 +681,5 @@ let file_name = expand("%")
 if has('vim_starting') &&  file_name == ""
       autocmd VimEnter * NERDTree ./
 endif
+
+let NERDTreeDirArrows=0

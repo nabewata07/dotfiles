@@ -242,8 +242,7 @@ bindkey -e
 ## 独自環境用拡張
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
 ## 起動時にnvm起動
-. ~/nvm/nvm.sh
-nvm use v0.8.12
-eval "$(rbenv init -)"
-#PATH=/usr/local/vim-7.3/bin:/usr/local/tmux/bin:$PATH
+. ~/.nvm/nvm.sh
+#nvm use v0.8.16
+#PATH=/usr/local/git/bin:/usr/local/vim-7.3/bin:/usr/local/tmux/bin:$PATH
 
