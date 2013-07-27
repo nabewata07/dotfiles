@@ -180,8 +180,6 @@ setopt interactive_comments  # コマンドラインでも # 以降をコメン�
 
 # aliases
 alias ll="/bin/ls"
-#alias ls="ls -GFla"
-#alias ls="ls -la"
 alias ls="ll -al --show-control-chars --color=auto -F"
 alias jobs='jobs -l'
 alias sc='screen'
@@ -243,6 +241,5 @@ bindkey -e
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
 ## 起動時にnvm起動
 . ~/.nvm/nvm.sh
-#nvm use v0.8.16
-#PATH=/usr/local/git/bin:/usr/local/vim-7.3/bin:/usr/local/tmux/bin:$PATH
-
+#nvm use v0.11.2
+#eval "$(rbenv init -)"
