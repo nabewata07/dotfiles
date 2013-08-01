@@ -237,8 +237,6 @@ bindkey -e
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 #[[ -s "/usr/local/rvm/scripts/rvm" ]] && . "/usr/local/rvm/scripts/rvm"
 #
-#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-#PATH=$PATH:/Users/nabewata/.rbenv/versions/1.9.3-p327/bin
 #
 ## 独自環境用拡張
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"

@@ -72,7 +72,7 @@ set title
 " ルーラーを表示
 set ruler
 " タブ文字を CTRL-I で表示し、行末に $ で表示する
-set list
+set nolist
 " 入力中のコマンドをステータスに表示する
 set showcmd
 " ステータスラインを常に表示
@@ -484,6 +484,7 @@ Bundle 'https://github.com/Shougo/neosnippet.git'
 Bundle 'https://github.com/vim-scripts/BlackSea.git'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'https://github.com/vim-scripts/sudo.vim.git'
+Bundle 'git://github.com/jimsei/winresizer.git'
 
 "
 " original repos on github
@@ -665,7 +666,6 @@ endfunction
 " Ruby jump do - end
 "================================================================================
 source $VIMRUNTIME/macros/matchit.vim
-
 
 "================================================================================
 " 独自拡張を読み込む
