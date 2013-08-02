@@ -211,7 +211,7 @@ au Filetype smarty exec('set dictionary=$HOME/.vim/syntax/smarty.vim')
 au Filetype smarty set complete+=k
 
 "rspec シンタックスの設定
-au BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec 
+au BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
 au Filetype ruby exec('set dictionary=$HOME/.vim/syntax/rspec.vim')
 
 "au Filetype php let g:neocomplcache_enable_at_startup = 0
@@ -442,10 +442,10 @@ if v:version >= 700
 endif
 
 "
-" high light current line 
+" high light current line
 "
-au WinLeave * set nocursorline 
-au WinEnter * set cursorline 
+au WinLeave * set nocursorline
+au WinEnter * set cursorline
 set cursorline "cursorcolumn
 
 "---------------------------------------------------
@@ -458,7 +458,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 "Bundle 'gmarik/vundle'
 "Bundle 'git://github.com/gmarik/vundle.git'
 
@@ -499,7 +499,7 @@ Bundle 'git://github.com/jimsei/winresizer.git'
 "Bundle 'git://git.wincent.com/command-t.git'
 " ...
 
-filetype plugin indent on 
+filetype plugin indent on
 
 "---------------------------------------------------
 " Unite Setting
@@ -521,7 +521,7 @@ nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
 "---------------------------------------------------
 " Window Keymap Setting
 "---------------------------------------------------
-"quick chenge window size 
+"quick chenge window size
 "Ctrl + E jkhl
 "nnoremap [winsize] <Nop>
 "nmap <C-E> [winsize]
@@ -683,3 +683,15 @@ if has('vim_starting') &&  file_name == ""
 endif
 
 let NERDTreeDirArrows=0
+
+" delete white space at end of line when write buffer
+autocmd BufWritePre * :%s/\s\+$//e
+
+" 80列以降を強調表示
+set textwidth=0
+if exists('&colorcolumn')
+    set colorcolumn=+1
+    " sh,cpp,perl,vim,...の部分は自分が使う
+    " プログラミング言語のfiletypeに合わせてください
+    autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme setlocal textwidth=80
+endif
