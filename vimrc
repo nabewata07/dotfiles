@@ -174,8 +174,11 @@ endif
 "----------------------------------------------------
 " 文字コードの設定
 " fileencodingsの設定ではencodingの値を一番最後に記述する
+" Vimが内部処理に使用するエンコーディング
 set encoding=utf-8
+" 端末のエンコーディング
 set termencoding=utf-8
+" 現在開いているファイルのエンコーディング
 set fileencoding=utf-8
 "set fileencodings=ucs-bom,euc-jp,cp932,iso-2022-jp
 "set fileencodings+=,ucs-2le,ucs-2,utf-8
@@ -511,17 +514,19 @@ Bundle 'surround.vim'
 Bundle 'git://github.com/Rykka/colorv.vim.git'
 Bundle 'git://github.com/pasela/unite-webcolorname.git'
 Bundle 'git://github.com/thinca/vim-quickrun.git'
-Bundle 'https://github.com/Shougo/neosnippet'
 Bundle 'JavaScript-syntax'
 Bundle 'pangloss/vim-javascript'
 Bundle 'git://github.com/digitaltoad/vim-jade.git'
 Bundle 'https://github.com/Shougo/vimproc'
 Bundle 'thinca/vim-quickrun'
-Bundle 'https://github.com/Shougo/neosnippet.git'
+Bundle 'https://github.com/Shougo/neosnippet.vim'
 Bundle 'https://github.com/vim-scripts/BlackSea.git'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'https://github.com/vim-scripts/sudo.vim.git'
 Bundle 'git://github.com/jimsei/winresizer.git'
+Bundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
+Bundle 'git://github.com/Shougo/neocomplcache.vim.git'
+" Bundle 'git://github.com/thinca/vim-ref.git'
 
 "
 " original repos on github
@@ -732,3 +737,61 @@ if exists('&colorcolumn')
     " プログラミング言語のfiletypeに合わせてください
     autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme setlocal textwidth=80
 endif
+
+"================================================================================
+" when insert mode, change color of status line
+"================================================================================
+let g:hi_insert = 'hi StatusLine gui=None guifg=Black guibg=Yellow cterm=None ctermfg=Black ctermbg=Yellow'
+
+if has('syntax')
+  augroup InsertHook
+    autocmd!
+    autocmd InsertEnter * call s:StatusLine('Enter')
+    autocmd InsertLeave * call s:StatusLine('Leave')
+  augroup END
+endif
+
+let s:slhlcmd = ''
+function! s:StatusLine(mode)
+  if a:mode == 'Enter'
+    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
+    silent exec g:hi_insert
+  else
+    highlight clear StatusLine
+    silent exec s:slhlcmd
+  endif
+endfunction
+
+function! s:GetHighlight(hi)
+  redir => hl
+  exec 'highlight '.a:hi
+  redir END
+  let hl = substitute(hl, '[\r\n]', '', 'g')
+  let hl = substitute(hl, 'xxx', '', '')
+  return hl
+endfunction
+
+"if has('unix') && !has('gui_running')
+"  " ESC後すぐに反映されない場合
+"  inoremap <silent> <ESC> <ESC>
+"  inoremap <silent> <c-[> <ESC>
+"endif
+
+
+"================================================================================
+" settings for vim-indent-guides
+"================================================================================
+" vim立ち上げたときに、自動的にvim-indent-guidesをオンにする
+let g:indent_guides_enable_on_vim_startup=1
+" ガイドをスタートするインデントの量
+let g:indent_guides_start_level=2
+" 自動カラーを無効にする
+let g:indent_guides_auto_colors=0
+" 奇数インデントのカラー
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=darkcyan
+" 偶数インデントのカラー
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=darkgray
+" ハイライト色の変化の幅
+let g:indent_guides_color_change_percent = 30
+" ガイドの幅
+let g:indent_guides_guide_size = 1
