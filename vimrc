@@ -116,21 +116,58 @@ set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
 "highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none
 highlight statusline   term=NONE cterm=NONE guifg=red ctermfg=yellow ctermbg=red
 
-"----------------------------------------------------
-" インデント
-"----------------------------------------------------
+"==============================
+" Indent Settings
+"==============================
 " オートインデントを有効にする
 set autoindent
-" タブが対応する空白の数
-set tabstop=2
-" タブやバックスペースの使用等の編集操作をするときに、タブが対応する空白の数
-set softtabstop=2
-" インデントの各段階に使われる空白の数
-set shiftwidth=2
-" タブを挿入するとき、代わりに空白を使わない
-"set noexpandtab
-" タブにスペースを使う
-set expandtab
+set smartindent
+set cindent
+"Default setting
+set tabstop=4 shiftwidth=4 softtabstop=0
+
+
+"==============================
+" setting in each file type
+" ts : タブが対応する空白の数
+" sts : タブやバックスペースの使用等の編集操作をするときに、タブが対応する空白の数
+" sw : インデントの各段階に使われる空白の数
+" et : タブにスペースを使う
+"==============================
+
+if has("autocmd")
+    filetype plugin on
+    filetype indent on
+
+    autocmd FileType apache     setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType aspvbs     setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType c          setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType cpp        setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType cs         setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType css        setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType diff       setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType eruby      setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType html       setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType java       setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType perl       setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType php        setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType python     setlocal sw=4 sts=4 ts=4 et textwidth=80 cinwords=if,elif,else,for,while,try,except,finally,def,class
+    autocmd FileType ruby       setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType haml       setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType sh         setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType sql        setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType vb         setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType vim        setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType wsh        setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType xhtml      setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType xml        setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType yaml       setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType zsh        setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType scala      setlocal sw=2 sts=2 ts=2 et
+endif
+
+"==============================
 
 "----------------------------------------------------
 " 国際化関係
