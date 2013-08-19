@@ -736,6 +736,7 @@ if exists('&colorcolumn')
     " sh,cpp,perl,vim,...の部分は自分が使う
     " プログラミング言語のfiletypeに合わせてください
     autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme setlocal textwidth=80
+    hi ColorColumn ctermbg=blue
 endif
 
 "================================================================================
