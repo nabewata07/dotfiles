@@ -124,7 +124,7 @@ set autoindent
 set smartindent
 set cindent
 "Default setting
-set tabstop=4 shiftwidth=4 softtabstop=0
+set tabstop=4 shiftwidth=4 softtabstop=0 expandtab
 
 
 "==============================
