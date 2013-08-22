@@ -727,7 +727,7 @@ endif
 let NERDTreeDirArrows=0
 
 " delete white space at end of line when write buffer
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
 
 " 80列以降を強調表示
 set textwidth=0
