@@ -741,46 +741,6 @@ if exists('&colorcolumn')
 endif
 
 "================================================================================
-" when insert mode, change color of status line
-"================================================================================
-let g:hi_insert = 'hi StatusLine gui=None guifg=Black guibg=Yellow cterm=None ctermfg=Black ctermbg=Yellow'
-
-if has('syntax')
-  augroup InsertHook
-    autocmd!
-    autocmd InsertEnter * call s:StatusLine('Enter')
-    autocmd InsertLeave * call s:StatusLine('Leave')
-  augroup END
-endif
-
-let s:slhlcmd = ''
-function! s:StatusLine(mode)
-  if a:mode == 'Enter'
-    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
-    silent exec g:hi_insert
-  else
-    highlight clear StatusLine
-    silent exec s:slhlcmd
-  endif
-endfunction
-
-function! s:GetHighlight(hi)
-  redir => hl
-  exec 'highlight '.a:hi
-  redir END
-  let hl = substitute(hl, '[\r\n]', '', 'g')
-  let hl = substitute(hl, 'xxx', '', '')
-  return hl
-endfunction
-
-"if has('unix') && !has('gui_running')
-"  " ESC後すぐに反映されない場合
-"  inoremap <silent> <ESC> <ESC>
-"  inoremap <silent> <c-[> <ESC>
-"endif
-
-
-"================================================================================
 " settings for vim-indent-guides
 "================================================================================
 " vim立ち上げたときに、自動的にvim-indent-guidesをオンにする
