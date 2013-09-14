@@ -527,6 +527,7 @@ Bundle 'git://github.com/jimsei/winresizer.git'
 Bundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
 Bundle 'git://github.com/Shougo/neocomplcache.vim.git'
 " Bundle 'git://github.com/thinca/vim-ref.git'
+Bundle 'Keithbsmiley/rspec.vim'
 
 "
 " original repos on github
