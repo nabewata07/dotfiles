@@ -110,11 +110,11 @@ augroup END
 
 colorscheme BlackSea
 
-" ステータスラインに表示する情報の指定
-set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
-" ステータスラインの色
-"highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none
-highlight statusline   term=NONE cterm=NONE guifg=red ctermfg=yellow ctermbg=red
+"" ステータスラインに表示する情報の指定
+"set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
+"" ステータスラインの色
+""highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none
+"highlight statusline   term=NONE cterm=NONE guifg=red ctermfg=yellow ctermbg=red
 
 "==============================
 " Indent Settings
@@ -528,8 +528,9 @@ Bundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
 Bundle 'git://github.com/Shougo/neocomplcache.vim.git'
 " Bundle 'git://github.com/thinca/vim-ref.git'
 Bundle 'Keithbsmiley/rspec.vim'
+Bundle 'bling/vim-airline'
+Bundle 'git://github.com/tpope/vim-fugitive.git'
 
-"
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
 "Bundle 'Lokaltog/vim-easymotion'
@@ -540,7 +541,6 @@ Bundle 'Keithbsmiley/rspec.vim'
 "Bundle 'rails.vim'
 " non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
-" ...
 
 filetype plugin indent on
 
