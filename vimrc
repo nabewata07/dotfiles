@@ -108,7 +108,10 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter * match TrailingSpaces /\(\s\+$\|　\)/
 augroup END
 
-colorscheme BlackSea
+autocmd ColorScheme * hi LineNr ctermfg=yellow
+
+"colorscheme BlackSea
+colorscheme Tomorrow-Night-Bright
 
 "" ステータスラインに表示する情報の指定
 "set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
@@ -531,6 +534,7 @@ Bundle 'git://github.com/Shougo/neocomplcache.vim.git'
 Bundle 'Keithbsmiley/rspec.vim'
 Bundle 'bling/vim-airline'
 Bundle 'git://github.com/tpope/vim-fugitive.git'
+Bundle 'git://github.com/chriskempson/tomorrow-theme.git'
 
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
