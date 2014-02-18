@@ -104,7 +104,7 @@ set wrap
 
 augroup HighlightTrailingSpaces
   autocmd!
-  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=darkred ctermbg=darkred
   autocmd VimEnter,WinEnter * match TrailingSpaces /\(\s\+$\|　\)/
 augroup END
 
@@ -741,8 +741,9 @@ if exists('&colorcolumn')
     set colorcolumn=+1
     " sh,cpp,perl,vim,...の部分は自分が使う
     " プログラミング言語のfiletypeに合わせてください
-    autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme,php,rspec,javascript setlocal textwidth=80
-    hi ColorColumn ctermbg=blue
+    autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme,php,ruby.rspec,javascript setlocal textwidth=80
+    highlight ColorColumn ctermbg=darkblue
+    highlight Todo ctermbg=darkyellow ctermfg=darkgreen
 endif
 
 "================================================================================
