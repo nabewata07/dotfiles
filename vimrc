@@ -169,6 +169,7 @@ if has("autocmd")
     autocmd FileType yaml       setlocal sw=2 sts=2 ts=2 et
     autocmd FileType zsh        setlocal sw=2 sts=2 ts=2 et
     autocmd FileType scala      setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType manifest   setlocal sw=2 sts=2 ts=2 et
 endif
 
 "==============================
@@ -675,7 +676,7 @@ let g:winresizer_start_key = '<C-E>'
 "================================================================================
 let g:quickrun_config = {}
 let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
-let g:quickrun_config['ruby.rspec'] = {'command': 'bundle', 'cmdopt': 'exec rspec -cfd'}
+let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
 let g:quickrun_config['python.test'] = {'command': 'nosetests', 'cmdopt': '-v -s'}
 "let g:quickrun_config['*'] = {'runmode': 'async:remote:vimproc'}
 
@@ -690,7 +691,7 @@ nmap <Space>k [quickrun]
 nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
 fun! QRunRspecCurrentLine()
   let line = line(".")
-  exe ":QuickRun -cmdopt 'exec rspec -cfd -l " . line . "'"
+  exe ":QuickRun -cmdopt '-cfd -l " . line . "'"
 endfun
 
 
