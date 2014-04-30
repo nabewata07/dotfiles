@@ -180,7 +180,7 @@ setopt interactive_comments  # コマンドラインでも # 以降をコメン�
 
 # aliases
 alias ll="/bin/ls"
-alias ls="ll -al --show-control-chars --color=auto -F"
+alias ls="ll -alh --show-control-chars --color=auto -F"
 alias jobs='jobs -l'
 alias sc='screen'
 alias sudo='sudo env PATH=$PATH'
