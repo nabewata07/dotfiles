@@ -1,7 +1,5 @@
 #!/bin/bash 
 
-# NagasawaTsubasa
-# 2011/05/29
 # Don't move this file
 
 vimdir="vim"

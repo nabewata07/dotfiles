@@ -119,6 +119,8 @@ colorscheme Tomorrow-Night-Bright
 ""highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none
 "highlight statusline   term=NONE cterm=NONE guifg=red ctermfg=yellow ctermbg=red
 
+set lz
+
 "==============================
 " Indent Settings
 "==============================
@@ -728,7 +730,9 @@ endif
 "引数なしでvimを開いたらNERDTreeを起動，ありなら起動しない
 let file_name = expand("%")
 if has('vim_starting') &&  file_name == ""
-      autocmd VimEnter * NERDTree ./
+  if file_name == ""
+    autocmd VimEnter * NERDTree ./
+  endif
 endif
 
 let NERDTreeDirArrows=0
