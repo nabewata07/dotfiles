@@ -46,3 +46,8 @@ makeSymLink "${dir}.${gitconfig}" "/${gitconfig}"
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 mkdir ~/.zsh
+
+# set dotfiles repository user and email
+cd ~/dotfiles
+git config user.name "nabewata"
+git config user.email "channel.momo@gmail.com"
