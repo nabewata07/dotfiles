@@ -4,6 +4,8 @@
 [color]
   diff = auto
   ui = true
+[color "diff"]
+  meta = cyan
 [alias]
   st = status -sb
   pr = pull -rebase
