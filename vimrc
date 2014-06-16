@@ -339,7 +339,7 @@ nnoremap <silent> <F9> :NERDTreeToggle<CR>
 nnoremap <silent> <F10> :TlistToggle<CR>
 nnoremap <silent> <F11> :VCSDiff<CR>
 nnoremap <silent> <F2> :VCSLog<CR>
-nnoremap <Space>s. :<C-u>source {$HOME}/.vimrc<CR>
+nnoremap <Space>s. :<C-u>source $HOME/.vimrc<CR>
 
 if v:version >= 700
     nnoremap <C-g> :call OpenNewTab()<CR>
