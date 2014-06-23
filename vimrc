@@ -498,46 +498,50 @@ set cursorline "cursorcolumn
 "---------------------------------------------------
 " Vundles Setting
 "---------------------------------------------------
-set nocompatible               " be iMproved
-filetype off                   " required!
+if has('vim_starting')
+  set nocompatible               " be iMproved
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call neobundle#begin(expand('~/.vim/bundle/'))
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
-"Bundle 'git://github.com/gmarik/vundle.git'
+NeoBundleFetch 'Shougo/neobundle.vim'
 
 " My Bundles here:
-"Bundle 'unite.vim'
-Bundle 'unite-yarm'
-Bundle 'unite-gem'
-Bundle 'unite-locate'
-Bundle 'unite-font'
-Bundle 'unite-colorscheme'
-"Bundle 'neocomplcache'
-Bundle 'surround.vim'
-Bundle 'git://github.com/Rykka/colorv.vim.git'
-Bundle 'git://github.com/pasela/unite-webcolorname.git'
-Bundle 'git://github.com/thinca/vim-quickrun.git'
-Bundle 'JavaScript-syntax'
-Bundle 'pangloss/vim-javascript'
-Bundle 'git://github.com/digitaltoad/vim-jade.git'
-Bundle 'https://github.com/Shougo/vimproc'
-" Bundle 'thinca/vim-quickrun'
-Bundle 'https://github.com/Shougo/neosnippet.vim'
-Bundle 'https://github.com/vim-scripts/BlackSea.git'
-Bundle 'https://github.com/scrooloose/nerdtree.git'
-Bundle 'https://github.com/vim-scripts/sudo.vim.git'
-Bundle 'git://github.com/jimsei/winresizer.git'
+NeoBundle 'unite.vim'
+NeoBundle 'unite-locate'
+NeoBundle 'unite-font'
+NeoBundle 'unite-colorscheme'
+NeoBundle 'surround.vim'
+NeoBundle 'git://github.com/Rykka/colorv.vim.git'
+NeoBundle 'git://github.com/pasela/unite-webcolorname.git'
+NeoBundle 'git://github.com/thinca/vim-quickrun.git'
+NeoBundle 'JavaScript-syntax'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'git://github.com/digitaltoad/vim-jade.git'
+NeoBundle 'https://github.com/Shougo/neosnippet.vim'
+NeoBundle 'https://github.com/vim-scripts/BlackSea.git'
+NeoBundle 'https://github.com/scrooloose/nerdtree.git'
+NeoBundle 'https://github.com/vim-scripts/sudo.vim.git'
+NeoBundle 'git://github.com/jimsei/winresizer.git'
 "Bundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
-Bundle 'git://github.com/Shougo/neocomplcache.vim.git'
+NeoBundle 'git://github.com/Shougo/neocomplcache.vim.git'
 " Bundle 'git://github.com/thinca/vim-ref.git'
-Bundle 'Keithbsmiley/rspec.vim'
-Bundle 'bling/vim-airline'
-Bundle 'git://github.com/tpope/vim-fugitive.git'
-Bundle 'git://github.com/chriskempson/tomorrow-theme.git'
+" Bundle 'Keithbsmiley/rspec.vim'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'git://github.com/tpope/vim-fugitive.git'
+NeoBundle 'git://github.com/chriskempson/tomorrow-theme.git'
+NeoBundle 'git://github.com/Shougo/vimfiler.vim.git'
+" Bundle 'file:///tmp/nagasawa/cw.vim'
+
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
@@ -550,7 +554,11 @@ Bundle 'git://github.com/chriskempson/tomorrow-theme.git'
 " non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
 
+call neobundle#end()
+
 filetype plugin indent on
+
+NeoBundleCheck
 
 "---------------------------------------------------
 " Unite Setting
