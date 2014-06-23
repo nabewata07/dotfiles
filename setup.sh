@@ -43,7 +43,7 @@ makeSymLink "${dir}.${zshrc}" "/${zshrc}"
 makeSymLink "${dir}.${dircolors}" "/${dircolors}"
 makeSymLink "${dir}.${gitconfig}" "/${gitconfig}"
 
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
 mkdir ~/.zsh
 
