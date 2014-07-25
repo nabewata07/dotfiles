@@ -109,6 +109,9 @@ augroup HighlightTrailingSpaces
 augroup END
 
 autocmd ColorScheme * hi LineNr ctermfg=yellow
+autocmd ColorScheme * hi DiffAdd term=bold cterm=bold ctermfg=254 ctermbg=237 gui=bold
+autocmd ColorScheme * hi DiffChange ctermfg=172 ctermbg=237
+autocmd ColorScheme * hi DiffDelete ctermfg=167 ctermbg=234
 
 "colorscheme BlackSea
 colorscheme Tomorrow-Night-Bright
