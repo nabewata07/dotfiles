@@ -112,6 +112,7 @@ autocmd ColorScheme * hi LineNr ctermfg=yellow
 autocmd ColorScheme * hi DiffAdd term=bold cterm=bold ctermfg=254 ctermbg=237 gui=bold
 autocmd ColorScheme * hi DiffChange ctermfg=172 ctermbg=237
 autocmd ColorScheme * hi DiffDelete ctermfg=167 ctermbg=234
+autocmd ColorScheme * hi SpellBad ctermfg=white ctermbg=red
 
 "colorscheme BlackSea
 colorscheme Tomorrow-Night-Bright
@@ -535,6 +536,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'git://github.com/tpope/vim-fugitive.git'
 NeoBundle 'git://github.com/chriskempson/tomorrow-theme.git'
 NeoBundle 'git://github.com/Shougo/vimfiler.vim.git'
+NeoBundle 'scrooloose/syntastic'
 " Bundle 'file:///tmp/nagasawa/cw.vim'
 
 NeoBundle 'Shougo/vimproc', {
@@ -690,13 +692,10 @@ let g:winresizer_start_key = '<C-E>'
 let g:quickrun_config = {}
 let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
 let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
-let g:quickrun_config['python.test'] = {'command': 'nosetests', 'cmdopt': '-v -s'}
-"let g:quickrun_config['*'] = {'runmode': 'async:remote:vimproc'}
 
 augroup UjihisaRSpec
   autocmd!
   autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-  autocmd BufWinEnter,BufNewFile *_test.py set filetype=python.test
 augroup END
 
 nnoremap [quickrun] <Nop>
@@ -773,3 +772,9 @@ function! AirlineThemePatch(palette)
     endfor
   endif
 endfunction
+
+" for syntastic
+let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+" let g:syntastic_mode_map = { 'mode': 'active',
+"             \ 'active_filetypes': ['ruby', 'ruby.rspec'] }
+let g:syntastic_ruby_checkers = ['rubocop']
