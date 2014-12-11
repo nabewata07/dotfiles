@@ -547,6 +547,8 @@ NeoBundle 'Shougo/vimproc', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
+NeoBundle 'git://github.com/nanotech/jellybeans.vim.git'
+NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
 
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
@@ -778,3 +780,10 @@ let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 " let g:syntastic_mode_map = { 'mode': 'active',
 "             \ 'active_filetypes': ['ruby', 'ruby.rspec'] }
 let g:syntastic_ruby_checkers = ['rubocop']
+
+set regexpengine=1
+
+" for nerdcommenter
+let NERDSpaceDelims = 1
+nmap ,, <Plug>NERDCommenterToggle
+vmap ,, <Plug>NERDCommenterToggle
