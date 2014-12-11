@@ -10,7 +10,7 @@ noremap!  
 "256色に対応
 set t_Co=256
 
-":set directory=~/.vim/vim_swp
+" set directory=~/.vim/vim_swp
 
 "set runtimepath+=~/.vim/syntax
 
@@ -98,16 +98,14 @@ set textwidth=0
 " ウィンドウの幅より長い行は折り返して、次の行に続けて表示する
 set wrap
 
-" 全角スペースの表示
-"highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-"match ZenkakuSpace /　/
-
+" extra space, 全角スペースの表示
 augroup HighlightTrailingSpaces
   autocmd!
   autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=darkred ctermbg=darkred
   autocmd VimEnter,WinEnter * match TrailingSpaces /\(\s\+$\|　\)/
 augroup END
 
+" 行番号を黄色に
 autocmd ColorScheme * hi LineNr ctermfg=yellow
 autocmd ColorScheme * hi DiffAdd term=bold cterm=bold ctermfg=254 ctermbg=237 gui=bold
 autocmd ColorScheme * hi DiffChange ctermfg=172 ctermbg=237
@@ -160,7 +158,7 @@ if has("autocmd")
     autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
     autocmd FileType perl       setlocal sw=4 sts=4 ts=4 et
     autocmd FileType php        setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType python     setlocal sw=4 sts=4 ts=4 et textwidth=80 cinwords=if,elif,else,for,while,try,except,finally,def,class
+    autocmd FileType python     setlocal sw=2 sts=2 ts=2 et textwidth=80 cinwords=if,elif,else,for,while,try,except,finally,def,class
     autocmd FileType ruby       setlocal sw=2 sts=2 ts=2 et
     autocmd FileType ruby.rspec setlocal sw=2 sts=2 ts=2 et
     autocmd FileType haml       setlocal sw=2 sts=2 ts=2 et
@@ -262,7 +260,7 @@ au Filetype smarty set complete+=k
 
 "rspec シンタックスの設定
 au BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
-au Filetype ruby exec('set dictionary=$HOME/.vim/syntax/rspec.vim')
+au Filetype ruby.rspec exec('set dictionary=$HOME/.vim/syntax/rspec.vim')
 
 "au Filetype php let g:neocomplcache_enable_at_startup = 0
 
@@ -522,13 +520,12 @@ NeoBundle 'git://github.com/thinca/vim-quickrun.git'
 NeoBundle 'JavaScript-syntax'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'git://github.com/digitaltoad/vim-jade.git'
-NeoBundle 'https://github.com/Shougo/neosnippet.vim'
+" NeoBundle 'https://github.com/Shougo/neosnippet.vim'
 NeoBundle 'https://github.com/vim-scripts/BlackSea.git'
 NeoBundle 'https://github.com/scrooloose/nerdtree.git'
 NeoBundle 'https://github.com/vim-scripts/sudo.vim.git'
 NeoBundle 'git://github.com/jimsei/winresizer.git'
 "Bundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
-NeoBundle 'git://github.com/Shougo/neocomplcache.vim.git'
 " Bundle 'git://github.com/thinca/vim-ref.git'
 " Bundle 'Keithbsmiley/rspec.vim'
 NeoBundle 'bling/vim-airline'
@@ -545,6 +542,31 @@ NeoBundle 'Shougo/vimproc', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
+
+NeoBundleLazy 'Shougo/neosnippet.vim', {
+      \ 'depends' : ['Shougo/neosnippet-snippets'],
+      \ 'insert' : 1,
+      \ 'filetypes' : 'snippet',
+      \ 'unite_sources' : [
+      \ 'neosnippet', 'neosnippet/user', 'neosnippet/runtime'],
+      \ }
+
+function! s:meet_neocomplete_requirements()
+    return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
+endfunction
+
+if s:meet_neocomplete_requirements()
+    NeoBundleLazy 'Shougo/neocomplete.vim', {
+        \ 'depends' : 'Shougo/context_filetype.vim',
+        \ 'insert' : 1
+        \ }
+    NeoBundleFetch 'Shougo/neocomplcache.vim'
+else
+    NeoBundleFetch 'Shougo/neocomplete.vim'
+    NeoBundle 'Shougo/neocomplcache.vim', {
+         \ 'insert' : 1
+         \ }
+endif
 
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
@@ -689,14 +711,15 @@ let g:winresizer_start_key = '<C-E>'
 "================================================================================
 let g:quickrun_config = {}
 let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
+"let g:quickrun_config['ruby.rspec'] = {'command': 'bundle', 'cmdopt': 'exec rspec -cfd'}
 let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
-let g:quickrun_config['python.test'] = {'command': 'nosetests', 'cmdopt': '-v -s'}
+" let g:quickrun_config['python.test'] = {'command': 'nosetests', 'cmdopt': '-v -s'}
 "let g:quickrun_config['*'] = {'runmode': 'async:remote:vimproc'}
 
 augroup UjihisaRSpec
   autocmd!
   autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-  autocmd BufWinEnter,BufNewFile *_test.py set filetype=python.test
+  " autocmd BufWinEnter,BufNewFile *_test.py set filetype=python.test
 augroup END
 
 nnoremap [quickrun] <Nop>
@@ -704,7 +727,8 @@ nmap <Space>k [quickrun]
 nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
 fun! QRunRspecCurrentLine()
   let line = line(".")
-  exe ":QuickRun -cmdopt '-cfd -l " . line . "'"
+  "exe ":QuickRun -cmdopt 'exec rspec -cfd -l " . line . "'"
+  exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
 endfun
 
 
