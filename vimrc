@@ -537,7 +537,6 @@ NeoBundle 'git://github.com/tpope/vim-fugitive.git'
 NeoBundle 'git://github.com/chriskempson/tomorrow-theme.git'
 NeoBundle 'git://github.com/Shougo/vimfiler.vim.git'
 NeoBundle 'scrooloose/syntastic'
-" Bundle 'file:///tmp/nagasawa/cw.vim'
 
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -779,7 +778,7 @@ endfunction
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 " let g:syntastic_mode_map = { 'mode': 'active',
 "             \ 'active_filetypes': ['ruby', 'ruby.rspec'] }
-let g:syntastic_ruby_checkers = ['rubocop']
+" let g:syntastic_ruby_checkers = ['rubocop']
 
 set regexpengine=1
 
