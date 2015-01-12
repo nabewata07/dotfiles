@@ -531,6 +531,7 @@ NeoBundle 'git://github.com/tpope/vim-fugitive.git'
 NeoBundle 'git://github.com/chriskempson/tomorrow-theme.git'
 NeoBundle 'git://github.com/Shougo/vimfiler.vim.git'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'git://github.com/gregsexton/gitv.git'
 
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
