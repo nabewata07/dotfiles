@@ -198,7 +198,7 @@ builtin jobs | wc -l | read jobcount
 [ "x"  != "x$SSH_AGENT_PID" ] && ssh_agent=$SSH_AGENT_PID || ssh_agent=-
 PROMPT="$? $BLUE `date "+%H:%M:%S"` $GREEN%~$GRAY $HOSTNAME $GREEN
 %(!.#.$)%b $DEFAULT"               # 左表示
-RPROMPT="$BLUE $HOSTNAME [$YELLOW$jobcount$BLUE:$YELLOW$ssh_agent$BLUE] `date "+%Y/%m/%d"` $DEFAULT" # 右表示
+RPROMPT="$BLUE %M [$YELLOW$jobcount$BLUE:$YELLOW$ssh_agent$BLUE] `date "+%Y/%m/%d"` $DEFAULT" # 右表示
 }
 
 ##

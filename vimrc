@@ -725,7 +725,6 @@ nmap <Space>k [quickrun]
 nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
 fun! QRunRspecCurrentLine()
   let line = line(".")
-  "exe ":QuickRun -cmdopt 'exec rspec -cfd -l " . line . "'"
   exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
 endfun
 
