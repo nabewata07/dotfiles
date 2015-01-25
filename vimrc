@@ -4,15 +4,12 @@
 "leader
 let mapleader=" "
 "vimでbackspaceが効かないときの設定
+"  は制御コードDELete
 noremap  
 noremap!  
 
 "256色に対応
 set t_Co=256
-
-":set directory=~/.vim/vim_swp
-
-"set runtimepath+=~/.vim/syntax
 
 "viと同期しない設定
 set nocompatible
@@ -263,7 +260,7 @@ au Filetype smarty set complete+=k
 
 "rspec シンタックスの設定
 au BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
-au Filetype ruby exec('set dictionary=$HOME/.vim/syntax/rspec.vim')
+au Filetype ruby.rspec hi rspecGroupMethods term=underline ctermfg=110 guifg=#7aa6da
 
 "au Filetype php let g:neocomplcache_enable_at_startup = 0
 
@@ -531,12 +528,13 @@ NeoBundle 'git://github.com/jimsei/winresizer.git'
 "Bundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
 NeoBundle 'git://github.com/Shougo/neocomplcache.vim.git'
 " Bundle 'git://github.com/thinca/vim-ref.git'
-" Bundle 'Keithbsmiley/rspec.vim'
+NeoBundle 'Keithbsmiley/rspec.vim'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'git://github.com/tpope/vim-fugitive.git'
 NeoBundle 'git://github.com/chriskempson/tomorrow-theme.git'
 NeoBundle 'git://github.com/Shougo/vimfiler.vim.git'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'git://github.com/gregsexton/gitv.git'
 
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -704,7 +702,7 @@ nmap <Space>k [quickrun]
 nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
 fun! QRunRspecCurrentLine()
   let line = line(".")
-  exe ":QuickRun -cmdopt '-cfd -l " . line . "'"
+  exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
 endfun
 
 
