@@ -549,6 +549,7 @@ NeoBundle 'Shougo/vimproc', {
       \ }
 NeoBundle 'git://github.com/nanotech/jellybeans.vim.git'
 NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
+NeoBundle 'git://github.com/evidens/vim-twig.git'
 
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
