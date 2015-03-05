@@ -184,6 +184,7 @@ alias ls="ll -alh -FG"
 alias jobs='jobs -l'
 alias sc='screen'
 alias sudo='sudo env PATH=$PATH'
+alias st='git st'
 
 
 # .zshfunctions

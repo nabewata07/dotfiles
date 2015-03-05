@@ -546,6 +546,7 @@ NeoBundle 'Shougo/vimproc', {
       \ }
 NeoBundle 'git://github.com/nanotech/jellybeans.vim.git'
 NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
+NeoBundle 'git://github.com/evidens/vim-twig.git'
 
 NeoBundleLazy 'Shougo/neosnippet.vim', {
       \ 'depends' : ['Shougo/neosnippet-snippets'],
