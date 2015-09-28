@@ -527,6 +527,12 @@ NeoBundle 'https://github.com/scrooloose/nerdtree.git'
 NeoBundle 'https://github.com/vim-scripts/sudo.vim.git'
 NeoBundle 'git://github.com/jimsei/winresizer.git'
 "Bundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
+if v:version <= 703
+  NeoBundle 'git://github.com/Shougo/neocomplcache.vim.git'
+endif
+if v:version > 703
+  NeoBundle 'git://github.com/Shougo/neocomplete.vim.git'
+endif
 " Bundle 'git://github.com/thinca/vim-ref.git'
 NeoBundle 'Keithbsmiley/rspec.vim'
 NeoBundle 'bling/vim-airline'
@@ -547,6 +553,7 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle 'git://github.com/nanotech/jellybeans.vim.git'
 NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
 NeoBundle 'git://github.com/evidens/vim-twig.git'
+NeoBundle 'vim-jp/vimdoc-ja'
 
 NeoBundleLazy 'Shougo/neosnippet.vim', {
       \ 'depends' : ['Shougo/neosnippet-snippets'],
@@ -693,7 +700,9 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+if v:version > 703
+  let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+endif
 "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
@@ -806,9 +815,13 @@ let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 "             \ 'active_filetypes': ['ruby', 'ruby.rspec'] }
 " let g:syntastic_ruby_checkers = ['rubocop']
 
-set regexpengine=1
+if v:version > 703
+  set regexpengine=1
+endif
 
 " for nerdcommenter
 let NERDSpaceDelims = 1
 nmap ,, <Plug>NERDCommenterToggle
 vmap ,, <Plug>NERDCommenterToggle
+
+set tabpagemax=25
