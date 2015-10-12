@@ -242,5 +242,6 @@ bindkey -e
 ## 独自環境用拡張
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
 ## 起動時にnvm起動
-. ~/nvm/nvm.sh
+. ~/.nvm/nvm.sh
+nvm use 0.12.2
 eval "$(rbenv init -)"
