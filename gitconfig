@@ -23,3 +23,5 @@
   d = diff
   a = add -p
   c = commit -v
+[core]
+  excludefiles = ~/dotfiles/.gitignore
