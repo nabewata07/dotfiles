@@ -1,0 +1,2 @@
+colorscheme Tomorrow-Night-Bright
+
