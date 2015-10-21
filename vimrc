@@ -556,6 +556,7 @@ NeoBundle 'git://github.com/nanotech/jellybeans.vim.git'
 NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
 NeoBundle 'git://github.com/evidens/vim-twig.git'
 NeoBundle 'vim-jp/vimdoc-ja'
+NeoBundle 'SQLUtilities'
 
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
