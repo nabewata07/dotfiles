@@ -557,6 +557,7 @@ NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
 NeoBundle 'git://github.com/evidens/vim-twig.git'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'SQLUtilities'
+NeoBundle 'Align'
 
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
