@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <root>
+
   <item>
     <name>escape as vim</name>
     <identifier>private.ctrl_escape</identifier>
@@ -9,22 +10,28 @@
       KeyCode::ESCAPE
     </autogen>
   </item>
+
   <item>
     <name>delete_to_backslash</name>
     <identifier>private.delete_backslash</identifier>
+    <device_only>DeveiceVendor::RawValue::0x05ac, DeviceProduct::RawValue::0x0273</device_only>
     <autogen>
       --KeyToKey--
       KeyCode::DELETE,
       KeyCode::BACKSLASH
     </autogen>
   </item>
+
   <item>
     <name>backslash_to_delete</name>
     <identifier>private.backslash_delete</identifier>
+    <device_only>DeveiceVendor::RawValue::0x05ac, DeviceProduct::RawValue::0x0273</device_only>
     <autogen>
       --KeyToKey--
       KeyCode::BACKSLASH,
       KeyCode::DELETE
     </autogen>
   </item>
+
 </root>
+
