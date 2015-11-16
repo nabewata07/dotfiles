@@ -176,6 +176,7 @@ if has("autocmd")
     autocmd FileType zsh        setlocal sw=2 sts=2 ts=2 et
     autocmd FileType scala      setlocal sw=2 sts=2 ts=2 et
     autocmd FileType manifest   setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType go         setlocal noexpandtab tabstop=4 shiftwidth=4
 endif
 
 "==============================
@@ -558,6 +559,7 @@ NeoBundle 'git://github.com/evidens/vim-twig.git'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'SQLUtilities'
 NeoBundle 'Align'
+NeoBundle 'vim-jp/vim-go-extra'
 
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
