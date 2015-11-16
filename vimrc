@@ -562,6 +562,7 @@ NeoBundle 'SQLUtilities'
 NeoBundle 'Align'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'xolox/vim-easytags'
+NeoBundle 'xolox/vim-misc'
 NeoBundle 'vim-jp/vim-go-extra'
 
 " original repos on github
