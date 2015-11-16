@@ -560,6 +560,8 @@ NeoBundle 'git://github.com/evidens/vim-twig.git'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'SQLUtilities'
 NeoBundle 'Align'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'xolox/vim-easytags'
 NeoBundle 'vim-jp/vim-go-extra'
 
 " original repos on github
