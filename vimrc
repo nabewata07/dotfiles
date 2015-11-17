@@ -176,6 +176,7 @@ if has("autocmd")
     autocmd FileType zsh        setlocal sw=2 sts=2 ts=2 et
     autocmd FileType scala      setlocal sw=2 sts=2 ts=2 et
     autocmd FileType manifest   setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType go         setlocal noexpandtab tabstop=4 shiftwidth=4
 endif
 
 "==============================
@@ -517,17 +518,18 @@ NeoBundle 'unite-locate'
 NeoBundle 'unite-font'
 NeoBundle 'unite-colorscheme'
 NeoBundle 'surround.vim'
-NeoBundle 'git://github.com/Rykka/colorv.vim.git'
+" NeoBundle 'git://github.com/Rykka/colorv.vim.git'
 NeoBundle 'git://github.com/pasela/unite-webcolorname.git'
 NeoBundle 'git://github.com/thinca/vim-quickrun.git'
 NeoBundle 'JavaScript-syntax'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'git://github.com/digitaltoad/vim-jade.git'
-NeoBundle 'https://github.com/Shougo/neosnippet.vim'
 NeoBundle 'https://github.com/vim-scripts/BlackSea.git'
 NeoBundle 'https://github.com/scrooloose/nerdtree.git'
 NeoBundle 'https://github.com/vim-scripts/sudo.vim.git'
 NeoBundle 'git://github.com/jimsei/winresizer.git'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neosnippet'
 "Bundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
 if v:version <= 703
   NeoBundle 'git://github.com/Shougo/neocomplcache.vim.git'
@@ -556,6 +558,12 @@ NeoBundle 'git://github.com/nanotech/jellybeans.vim.git'
 NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
 NeoBundle 'git://github.com/evidens/vim-twig.git'
 NeoBundle 'vim-jp/vimdoc-ja'
+NeoBundle 'SQLUtilities'
+NeoBundle 'Align'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'xolox/vim-easytags'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'vim-jp/vim-go-extra'
 
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
