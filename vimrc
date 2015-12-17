@@ -881,3 +881,6 @@ function! MakeTabLine()
 endfunction
 
 set tabline=%!MakeTabLine()
+
+autocmd filetype go autocmd BufWritePre <buffer> Fmt
+
