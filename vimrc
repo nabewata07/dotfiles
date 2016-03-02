@@ -107,6 +107,7 @@ augroup END
 
 " 行番号を黄色に
 autocmd ColorScheme * hi LineNr ctermfg=yellow
+" diffの色の調整
 autocmd ColorScheme * hi DiffAdd term=bold cterm=bold ctermfg=254 ctermbg=237 gui=bold
 autocmd ColorScheme * hi DiffChange ctermfg=172 ctermbg=237
 autocmd ColorScheme * hi DiffDelete ctermfg=167 ctermbg=234
@@ -115,13 +116,7 @@ autocmd ColorScheme * hi SpellBad ctermfg=white ctermbg=red
 "colorscheme BlackSea
 colorscheme Tomorrow-Night-Bright
 
-"" ステータスラインに表示する情報の指定
-"set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
-"" ステータスラインの色
-""highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none
-"highlight statusline   term=NONE cterm=NONE guifg=red ctermfg=yellow ctermbg=red
-
-set lz
+set lazyredraw
 
 "==============================
 " Indent Settings
@@ -200,27 +195,11 @@ set fileencoding=utf-8
 nnoremap <C-]> g<C-]>
 
 "taglist
-let Tlist_Ctags_Cmd = "/usr/bin/ctags"    "ctagsのパス
+" let Tlist_Ctags_Cmd = "/usr/bin/ctags"    "ctagsのパス
 let Tlist_Show_One_File = 1               "現在編集中のソースのタグしか表示しない
 let Tlist_Exit_OnlyWindow = 1             "taglistのウィンドーが最後のウィンドーならばVimを閉じる
 let Tlist_Use_Right_Window = 1            "taglistを右側で開く
 " 現在のディレクトリから再帰的に上層のtagsファイルを探す
-
-"----------------------------------------------------
-" LookupFile
-"----------------------------------------------------
-nnoremap <silent> <F12> :LookupFile<CR>
-nmap <unique> <silent> <C-S> :LUBufs ^.*<CR>
-let g:LookupFile_AlwaysAcceptFirst=1
-let g:LookupFile_PreserveLastPattern=0
-let g:LookupFile_AllowNewFiles=0
-inoremap <buffer> <TAB> <C-n>
-inoremap <buffer> <S-TAB> <C-p>
-"inoremap <buffer> <C-c> <Esc><C-W>q
-"nnoremap <buffer> <C-c> <C-W>q
-"inoremap <buffer> <C-s> <Esc>:LUPath<CR>
-"nnoremap <buffer> <C-s> :LUPath<CR>
-
 
 "----------------------------------------------------
 " オートコマンド
@@ -236,9 +215,6 @@ if has("autocmd")
 endif
 
 "<TAB>で補完
-"" {{{ Autocompletion using the TAB key
-" This function determines, wether we are on the start of the line text (then tab indents) or
-" " if we want to try autocompletion
 function! InsertTabWrapper()
     let col = col('.') - 1
     if !col || getline('.')[col - 1] !~ '\k'
@@ -253,8 +229,6 @@ function! InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
-":autocmd FileType php noremap <F2> :!php -l %<CR>
-
 "smarty シンタックスの設定
 au BufRead,BufNewFile *.tpl.* set filetype=smarty
 au Filetype smarty exec('set dictionary=$HOME/.vim/syntax/smarty.vim')
@@ -263,8 +237,6 @@ au Filetype smarty set complete+=k
 "rspec シンタックスの設定
 au BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
 au Filetype ruby.rspec hi rspecGroupMethods term=underline ctermfg=110 guifg=#7aa6da
-
-"au Filetype php let g:neocomplcache_enable_at_startup = 0
 
 "----------------------------------------------------
 " その他
@@ -276,8 +248,7 @@ set shortmess+=I
 
 set ruler number
 set number
-" set runtimepath+=$HOME/.vim/pluguin,$HOME/.vim/doc,$HOME/.vim/autoload
-"
+
 if &encoding !=# 'utf-8'
     set encoding=japan
     set fileencoding=japan
@@ -458,20 +429,10 @@ endfunction
 vnoremap <C-K> :m -2<CR>v '<
 vnoremap <C-J> :m '>+1<CR>v '<
 
-au FileType php inoremap <C-e> <ESC>$a;
-
-
-nnoremap <F4> :call TestFunc()<CR>
-function! TestFunc()
-    let f = system("svn st | egrep \"^M\" | awk '{print $2}'")
-    let dirs = split(f, '/')
-    echo dirs
-endfunction
 "---------------------------------------------------
 " タブに{tabNo} - {window count}を表示する
 "---------------------------------------------------
 if v:version >= 700
-
     function! TabLine()
         let res = ''
         let curtab = tabpagenr()
@@ -516,33 +477,29 @@ NeoBundle 'unite-locate'
 NeoBundle 'unite-font'
 NeoBundle 'unite-colorscheme'
 NeoBundle 'surround.vim'
-" NeoBundle 'git://github.com/Rykka/colorv.vim.git'
-NeoBundle 'git://github.com/pasela/unite-webcolorname.git'
-NeoBundle 'git://github.com/thinca/vim-quickrun.git'
-NeoBundle 'JavaScript-syntax'
+NeoBundle 'pasela/unite-webcolorname.git'
+NeoBundle 'thinca/vim-quickrun.git'
 NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'git://github.com/digitaltoad/vim-jade.git'
-NeoBundle 'https://github.com/vim-scripts/BlackSea.git'
-NeoBundle 'https://github.com/scrooloose/nerdtree.git'
-NeoBundle 'https://github.com/vim-scripts/sudo.vim.git'
-NeoBundle 'git://github.com/jimsei/winresizer.git'
+NeoBundle 'digitaltoad/vim-jade.git'
+NeoBundle 'vim-scripts/BlackSea.git'
+NeoBundle 'scrooloose/nerdtree.git'
+NeoBundle 'vim-scripts/sudo.vim.git'
+NeoBundle 'jimsei/winresizer.git'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neosnippet'
-"Bundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
 if v:version <= 703
-  NeoBundle 'git://github.com/Shougo/neocomplcache.vim.git'
+  NeoBundle 'Shougo/neocomplcache.vim.git'
 endif
 if v:version > 703
-  NeoBundle 'git://github.com/Shougo/neocomplete.vim.git'
+  NeoBundle 'Shougo/neocomplete.vim.git'
 endif
-" Bundle 'git://github.com/thinca/vim-ref.git'
 NeoBundle 'Keithbsmiley/rspec.vim'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'git://github.com/tpope/vim-fugitive.git'
-NeoBundle 'git://github.com/chriskempson/tomorrow-theme.git'
-NeoBundle 'git://github.com/Shougo/vimfiler.vim.git'
+NeoBundle 'tpope/vim-fugitive.git'
+NeoBundle 'chriskempson/tomorrow-theme.git'
+NeoBundle 'Shougo/vimfiler.vim.git'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'git://github.com/gregsexton/gitv.git'
+NeoBundle 'gregsexton/gitv.git'
 
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -552,16 +509,17 @@ NeoBundle 'Shougo/vimproc', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
-NeoBundle 'git://github.com/nanotech/jellybeans.vim.git'
-NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
-NeoBundle 'git://github.com/evidens/vim-twig.git'
+NeoBundle 'nanotech/jellybeans.vim.git'
+NeoBundle 'scrooloose/nerdcommenter.git'
+NeoBundle 'evidens/vim-twig.git'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'SQLUtilities'
 NeoBundle 'Align'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'xolox/vim-easytags'
 NeoBundle 'xolox/vim-misc'
-NeoBundle 'vim-jp/vim-go-extra'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'mattn/go-errcheck-vim'
 
 NeoBundleLazy 'Shougo/neosnippet.vim', {
       \ 'depends' : ['Shougo/neosnippet-snippets'],
@@ -588,17 +546,6 @@ else
          \ }
 endif
 
-" original repos on github
-"Bundle 'tpope/vim-fugitive'
-"Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-" vim-scripts repos
-"Bundle 'L9'
-"Bundle 'FuzzyFinder'
-"Bundle 'rails.vim'
-" non github repos
-"Bundle 'git://git.wincent.com/command-t.git'
-
 call neobundle#end()
 
 filetype plugin indent on
@@ -621,18 +568,6 @@ nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]b :<C-u>Unite buffer -default-action=vsplit<CR>
 "unite outline
 nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
-
-"---------------------------------------------------
-" Window Keymap Setting
-"---------------------------------------------------
-"quick chenge window size
-"Ctrl + E jkhl
-"nnoremap [winsize] <Nop>
-"nmap <C-E> [winsize]
-"nnoremap [winsize]k :resize -3<CR>
-"nnoremap [winsize]j :resize +3<CR>
-"nnoremap [winsize]h :vertical resize +10<CR>
-"nnoremap [winsize]l :vertical resize -10<CR>
 
 "---------------------------------------------------
 " neocomplepop setting
@@ -833,3 +768,8 @@ nmap ,, <Plug>NERDCommenterToggle
 vmap ,, <Plug>NERDCommenterToggle
 
 set tabpagemax=25
+
+" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_go_checkers = ['go', 'golint']
+let g:syntastic_mode_map = { 'mode': 'passive', 'passive_filetypes': ['go'] }
+
