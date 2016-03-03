@@ -4,6 +4,8 @@
 " @see :h fold
 " +++++++++++++++++++
 
+" !! vimは--with-lua を推奨 !!
+
 " {{{ 基本的な設定
 "----------------------------------------------------
 "leader
@@ -470,9 +472,10 @@ NeoBundle 'xolox/vim-easytags'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'fatih/vim-go'
 
+" 遅延読み込み
 NeoBundleLazy 'Shougo/neosnippet.vim', {
-      \ 'depends' : ['Shougo/neosnippet-snippets'],
-      \ 'insert' : 1,
+      \ 'depends' : ['Shougo/neosnippet-snippets'], " 依存関係：Updateも一緒にされる
+      \ 'insert' : 1, " insertモードのときに読み込まれる
       \ 'filetypes' : 'snippet',
       \ 'unite_sources' : [
       \ 'neosnippet', 'neosnippet/user', 'neosnippet/runtime'],
@@ -487,7 +490,7 @@ if s:meet_neocomplete_requirements()
         \ 'depends' : 'Shougo/context_filetype.vim',
         \ 'insert' : 1
         \ }
-    NeoBundleFetch 'Shougo/neocomplcache.vim'
+    NeoBundleFetch 'Shougo/neocomplcache.vim' " Bundle管理するけど読み込まない
 else
     NeoBundleFetch 'Shougo/neocomplete.vim'
     NeoBundle 'Shougo/neocomplcache.vim', {
