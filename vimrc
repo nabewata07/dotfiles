@@ -473,9 +473,11 @@ NeoBundle 'xolox/vim-misc'
 NeoBundle 'fatih/vim-go'
 
 " 遅延読み込み
+" dependsは依存関係：Updateも一緒にされる
+" 'insert' : 1 はinsertモードのときに読み込まれる
 NeoBundleLazy 'Shougo/neosnippet.vim', {
-      \ 'depends' : ['Shougo/neosnippet-snippets'], " 依存関係：Updateも一緒にされる
-      \ 'insert' : 1, " insertモードのときに読み込まれる
+      \ 'depends' : ['Shougo/neosnippet-snippets'],
+      \ 'insert' : 1,
       \ 'filetypes' : 'snippet',
       \ 'unite_sources' : [
       \ 'neosnippet', 'neosnippet/user', 'neosnippet/runtime'],
