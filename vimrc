@@ -282,15 +282,6 @@ nnoremap <silent> <F11> :VCSDiff<CR>
 nnoremap <silent> <F2> :VCSLog<CR>
 nnoremap <Space>s. :<C-u>source $HOME/.vimrc<CR>
 
-if v:version >= 700
-    nnoremap <C-g> :call OpenNewTab()<CR>
-    function! OpenNewTab()
-        let f = expand("%:p")
-        execute ":q"
-        execute ":tabnew ".f
-    endfunction
-endif
-
 " autoclose
 inoremap (<CR> ()<Left>
 inoremap '<CR> ''<Left>
@@ -723,6 +714,10 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " let g:syntastic_mode_map = { 'mode': 'active',
 "             \ 'active_filetypes': ['ruby', 'ruby.rspec'] }
 " let g:syntastic_ruby_checkers = ['rubocop']
+" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_go_checkers = ['go', 'golint']
+let g:syntastic_go_checkers = ['gometalinter']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " }}}
 
 if v:version > 703
@@ -734,10 +729,6 @@ let NERDSpaceDelims = 1
 nmap ,, <Plug>NERDCommenterToggle
 vmap ,, <Plug>NERDCommenterToggle
 
-" autocmd filetype go autocmd BufWritePre <buffer> Fmt
-" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_go_checkers = ['go', 'golint']
-let g:syntastic_mode_map = { 'mode': 'passive', 'passive_filetypes': ['go'] }
 " }}}
 
 " Edit file by tabedit.
@@ -787,6 +778,35 @@ function! MakeTabLine()
 endfunction
 
 set tabline=%!MakeTabLine()
+" }}}
+
+" {{{ vim-go setting
+" By default syntax-highlighting for Functions, Methods and Structs is disabled.
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+" Enable goimports to automatically insert import paths instead of gofmt:
+let g:go_fmt_command = "goimports"
+
+" By default vim-go shows errors for the fmt command, to disable it:
+" let g:go_fmt_fail_silently = 1
+
+" Disable auto fmt on save:
+let g:go_fmt_autosave = 0
+
+" Disable opening browser after posting your snippet to play.golang.org:
+" let g:go_play_open_browser = 0
+
+autocmd filetype go autocmd QuitPre <buffer> GoFmt
+" autocmd filetype go autocmd BufWritePre <buffer> GoLint
+
+let g:go_metalinter_enabled = 1
+
+nnoremap <C-g> :GoErrCheck<CR>
 " }}}
 
 set tabpagemax=25
