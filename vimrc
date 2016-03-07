@@ -149,7 +149,7 @@ if exists('&colorcolumn')
     set colorcolumn=+1
     " sh,cpp,perl,vim,...の部分は自分が使う
     " プログラミング言語のfiletypeに合わせてください
-    autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme,php,ruby.rspec,javascript setlocal textwidth=80
+    autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme,php,ruby.rspec,javascript,go setlocal textwidth=80
     highlight ColorColumn ctermbg=darkblue
     highlight Todo ctermbg=darkyellow ctermfg=darkgreen
 endif
@@ -233,6 +233,9 @@ autocmd FileType svn :set fileencoding=utf-8
 "----------------------------------------------------
 " 同じ関数名があった場合、どれに飛ぶか選択できるようにする
 nnoremap <C-]> g<C-]>
+
+" [tag tab] 新しいタブでジャンプ
+nnoremap tt :tab sp<CR> :exe("tjump ".expand('<cword>'))<CR>
 
 "taglist
 " let Tlist_Ctags_Cmd = "/usr/bin/ctags"    "ctagsのパス
@@ -802,11 +805,42 @@ let g:go_fmt_autosave = 0
 " let g:go_play_open_browser = 0
 
 autocmd filetype go autocmd QuitPre <buffer> GoFmt
+autocmd filetype go.test autocmd QuitPre <buffer> GoFmt
 " autocmd filetype go autocmd BufWritePre <buffer> GoLint
 
 let g:go_metalinter_enabled = 1
 
 nnoremap <C-g> :GoErrCheck<CR>
+" }}}
+
+" {{{ gotags setting
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 " }}}
 
 set tabpagemax=25
