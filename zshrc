@@ -245,3 +245,6 @@ bindkey -e
 . ~/.nvm/nvm.sh
 nvm use 0.12.2
 eval "$(rbenv init -)"
+
+# not allow homewbrew to send data to google analytics
+export HOMEBREW_NO_ANALYTICS=1
