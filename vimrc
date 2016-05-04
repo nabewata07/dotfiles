@@ -176,6 +176,7 @@ if has("autocmd")
     autocmd FileType zsh        setlocal sw=2 sts=2 ts=2 et
     autocmd FileType scala      setlocal sw=2 sts=2 ts=2 et
     autocmd FileType manifest   setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType go         setlocal noexpandtab tabstop=4 shiftwidth=4
 endif
 
 "==============================
@@ -517,17 +518,18 @@ NeoBundle 'unite-locate'
 NeoBundle 'unite-font'
 NeoBundle 'unite-colorscheme'
 NeoBundle 'surround.vim'
-NeoBundle 'git://github.com/Rykka/colorv.vim.git'
+" NeoBundle 'git://github.com/Rykka/colorv.vim.git'
 NeoBundle 'git://github.com/pasela/unite-webcolorname.git'
 NeoBundle 'git://github.com/thinca/vim-quickrun.git'
 NeoBundle 'JavaScript-syntax'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'git://github.com/digitaltoad/vim-jade.git'
-NeoBundle 'https://github.com/Shougo/neosnippet.vim'
 NeoBundle 'https://github.com/vim-scripts/BlackSea.git'
 NeoBundle 'https://github.com/scrooloose/nerdtree.git'
 NeoBundle 'https://github.com/vim-scripts/sudo.vim.git'
 NeoBundle 'git://github.com/jimsei/winresizer.git'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neosnippet'
 "Bundle 'git://github.com/nathanaelkane/vim-indent-guides.git'
 if v:version <= 703
   NeoBundle 'git://github.com/Shougo/neocomplcache.vim.git'
@@ -556,6 +558,12 @@ NeoBundle 'git://github.com/nanotech/jellybeans.vim.git'
 NeoBundle 'git://github.com/scrooloose/nerdcommenter.git'
 NeoBundle 'git://github.com/evidens/vim-twig.git'
 NeoBundle 'vim-jp/vimdoc-ja'
+NeoBundle 'SQLUtilities'
+NeoBundle 'Align'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'xolox/vim-easytags'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'vim-jp/vim-go-extra'
 
 " original repos on github
 "Bundle 'tpope/vim-fugitive'
@@ -801,3 +809,54 @@ nmap ,, <Plug>NERDCommenterToggle
 vmap ,, <Plug>NERDCommenterToggle
 
 set tabpagemax=25
+
+" Edit file by tabedit.
+let g:vimfiler_edit_action = 'tabopen'
+
+call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
+
+
+" 各タブページのカレントバッファ名+αを表示
+function! s:tabpage_label(n)
+  " t:title と言う変数があったらそれを使う
+  let title = gettabvar(a:n, 'title')
+  if title !=# ''
+    return title
+  endif
+
+  " タブページ内のバッファのリスト
+  let bufnrs = tabpagebuflist(a:n)
+
+  " カレントタブページかどうかでハイライトを切り替える
+  let hi = a:n is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+
+  " バッファが複数あったらバッファ数を表示
+  let no = len(bufnrs)
+  if no is 1
+    let no = ''
+  endif
+  " タブページ内に変更ありのバッファがあったら '+' を付ける
+  let mod = len(filter(copy(bufnrs), 'getbufvar(v:val, "&modified")')) ? '+' : ''
+  let sp = (no . mod) ==# '' ? '' : ' '  " 隙間空ける
+
+  " カレントバッファ
+  let curbufnr = bufnrs[tabpagewinnr(a:n) - 1]  " tabpagewinnr() は 1 origin
+  let fname = pathshorten(bufname(curbufnr))
+
+  let label = no . mod . sp . fname
+
+  return '%' . a:n . 'T' . hi . label . '%T%#TabLineFill#'
+endfunction
+
+function! MakeTabLine()
+  let titles = map(range(1, tabpagenr('$')), 's:tabpage_label(v:val)')
+  let sep = ''  " タブ間の区切りなし
+  let tabpages = join(titles, sep) . sep . '%#TabLineFill#%T'
+  let info = ''  " 好きな情報を入れる
+  return tabpages . '%=' . info  " タブリストを左に、情報を右に表示
+endfunction
+
+set tabline=%!MakeTabLine()
+
+" autocmd filetype go autocmd BufWritePre <buffer> Fmt
+
