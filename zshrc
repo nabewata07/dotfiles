@@ -110,7 +110,7 @@ unsetopt complete_aliases       # エイリアスには別の補完規則を適�
 unsetopt correct_all            # 引数についてもスペル修正を試みる(うっとおしい)
 autoload -U compinit; compinit  # zshの補完機能を利用する
 fignore=(CVS .svn)              # 補完対象外
-eval `dircolors`                # 補完候補にも色付き表示
+#eval `dircolors`                # 補完候補にも色付き表示
 zstyle ':completion:*:default' list-colors ${LS_COLORS}
 # 補完の時に大文字小文字を区別しない(但し、大文字を打った場合は小文字に変換しない)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -180,7 +180,7 @@ setopt interactive_comments  # コマンドラインでも # 以降をコメン�
 
 # aliases
 alias ll="/bin/ls"
-alias ls="ll -alh --show-control-chars --color=auto -F"
+alias ls="ll -alh -FG"
 alias jobs='jobs -l'
 alias sc='screen'
 alias sudo='sudo env PATH=$PATH'
@@ -243,7 +243,5 @@ bindkey -e
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
 ## 起動時にnvm起動
 . ~/.nvm/nvm.sh
-nvm use v0.11.2
-export RBENV_ROOT=/usr/local/rbenv
-export PATH="$RBENV_ROOT/bin:$PATH"
+nvm use 0.12.2
 eval "$(rbenv init -)"

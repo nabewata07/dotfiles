@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 # Don't move this file
 
@@ -35,7 +35,7 @@ else
   dir="${HOME}/"
 fi
 
-makeSymLink "${dir}.${vimdir}" ""
+makeSymLink "${dir}.${vimdir}" "/"
 makeSymLink "${dir}.${vimrc}" "/${vimrc}"
 makeSymLink "${dir}.${screenrc}" "/${screenrc}"
 makeSymLink "${dir}.${tmuxconf}" "/${tmuxconf}"
