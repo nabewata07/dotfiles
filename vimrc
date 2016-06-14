@@ -40,6 +40,8 @@ set shortmess+=I
 
 set ruler number
 set number
+
+set clipboard=unnamed,autoselect
 " }}}
 
 " {{{ バックアップ関係
