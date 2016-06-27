@@ -53,9 +53,9 @@ set writebackup
 " バックアップをとる場合
 "set backup
 " バックアップファイルを作るディレクトリ
-"set backupdir=~/backup
+set backupdir=~/tmp/vim
 " スワップファイルを作るディレクトリ
-"set directory=~/swap
+set directory=~/tmp/vim
 " }}}
 
 " {{{ 検索関係

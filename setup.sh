@@ -46,6 +46,7 @@ makeSymLink "${dir}.${gitconfig}" "/${gitconfig}"
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
 mkdir ~/.zsh
+mkdir -p ~/tmp/vim
 
 # set dotfiles repository user and email
 cd ~/dotfiles
