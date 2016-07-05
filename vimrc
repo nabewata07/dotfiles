@@ -40,8 +40,6 @@ set shortmess+=I
 
 set ruler number
 set number
-
-set clipboard=unnamed,autoselect
 " }}}
 
 " {{{ バックアップ関係
@@ -467,6 +465,7 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'xolox/vim-easytags'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'fatih/vim-go'
+NeoBundle 'kannokanno/previm'
 
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
@@ -857,3 +856,14 @@ if glob("$HOME/.vimrc_org") != ''
 endif
 
 " vim: foldmethod=marker:
+
+" {{{ previm plugin settings
+"---------------------------------------------------
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+augroup PrevimSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
+" }}}
+
+vnoremap * "zy:let @/ = @z<CR>n
