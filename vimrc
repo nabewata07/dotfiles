@@ -53,9 +53,9 @@ set writebackup
 " バックアップをとる場合
 "set backup
 " バックアップファイルを作るディレクトリ
-"set backupdir=~/backup
+set backupdir=~/tmp/vim
 " スワップファイルを作るディレクトリ
-"set directory=~/swap
+set directory=~/tmp/vim
 " }}}
 
 " {{{ 検索関係
@@ -431,7 +431,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'unite.vim'
 NeoBundle 'unite-locate'
 NeoBundle 'unite-font'
-NeoBundle 'unite-colorscheme'
+" NeoBundle 'unite-colorscheme'
 NeoBundle 'surround.vim'
 NeoBundle 'pasela/unite-webcolorname.git'
 NeoBundle 'thinca/vim-quickrun.git'
@@ -466,6 +466,7 @@ NeoBundle 'xolox/vim-easytags'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'kannokanno/previm'
+NeoBundle 'jistr/vim-nerdtree-tabs'
 
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
@@ -697,7 +698,6 @@ if has('vim_starting') &&  file_name == ""
   endif
 endif
 
-let NERDTreeDirArrows=0
 " }}}
 
 " {{{ vim-airline color settings
@@ -867,3 +867,13 @@ augroup END
 " }}}
 
 vnoremap * "zy:let @/ = @z<CR>n
+
+
+if $TMUX != ""
+  augroup titlesettings
+    autocmd!
+    autocmd BufEnter * call system("tmux rename-window " . "'[vim] " . expand("%:t") . "'")
+    autocmd VimLeave * call system("tmux rename-window zsh")
+    autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+  augroup END
+endif
