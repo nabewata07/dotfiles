@@ -431,7 +431,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'unite.vim'
 NeoBundle 'unite-locate'
 NeoBundle 'unite-font'
-NeoBundle 'unite-colorscheme'
+" NeoBundle 'unite-colorscheme'
 NeoBundle 'surround.vim'
 NeoBundle 'pasela/unite-webcolorname.git'
 NeoBundle 'thinca/vim-quickrun.git'
@@ -465,6 +465,7 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'xolox/vim-easytags'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'fatih/vim-go'
+NeoBundle 'jistr/vim-nerdtree-tabs'
 
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
@@ -696,7 +697,6 @@ if has('vim_starting') &&  file_name == ""
   endif
 endif
 
-let NERDTreeDirArrows=0
 " }}}
 
 " {{{ vim-airline color settings
@@ -855,3 +855,24 @@ if glob("$HOME/.vimrc_org") != ''
 endif
 
 " vim: foldmethod=marker:
+
+" {{{ previm plugin settings
+"---------------------------------------------------
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+augroup PrevimSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
+" }}}
+
+vnoremap * "zy:let @/ = @z<CR>n
+
+
+if $TMUX != ""
+  augroup titlesettings
+    autocmd!
+    autocmd BufEnter * call system("tmux rename-window " . "'[vim] " . expand("%:t") . "'")
+    autocmd VimLeave * call system("tmux rename-window zsh")
+    autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+  augroup END
+endif
