@@ -466,7 +466,6 @@ NeoBundle 'xolox/vim-easytags'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'kannokanno/previm'
-NeoBundle 'jistr/vim-nerdtree-tabs'
 
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
