@@ -465,6 +465,7 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'xolox/vim-easytags'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'fatih/vim-go'
+NeoBundle 'elzr/vim-json'
 
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
@@ -866,12 +867,6 @@ augroup END
 
 vnoremap * "zy:let @/ = @z<CR>n
 
-
-if $TMUX != ""
-  augroup titlesettings
-    autocmd!
-    autocmd BufEnter * call system("tmux rename-window " . "'[vim] " . expand("%:t") . "'")
-    autocmd VimLeave * call system("tmux rename-window zsh")
-    autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
-  augroup END
-endif
+" to show double quote in JSON file
+" with NeoBundle 'elzr/vim-json'
+let g:vim_json_syntax_conceal = 0
