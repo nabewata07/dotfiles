@@ -640,8 +640,8 @@ let g:winresizer_start_key = '<C-E>'
 let g:quickrun_config = {}
 let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
 
-"let g:quickrun_config['ruby.rspec'] = {'command': 'bundle', 'cmdopt': 'exec rspec -cfd'}
-let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
+let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c', 'cmdopt': '-cfd'}
+" let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
 let g:quickrun_config['ruby'] = {'cmdopt': '-w'}
 
 autocmd BufRead,BufNewFile *_test.go set filetype=go.test
@@ -662,7 +662,8 @@ nmap <Space>k [quickrun]
 nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
 fun! QRunRspecCurrentLine()
   let line = line(".")
-  exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
+  " exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
+  exe ":QuickRun -exec 'bundle exec %c %s%o' -cmdopt ':" . line . " -cfd'"
 endfun
 " }}}
 
