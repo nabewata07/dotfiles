@@ -136,6 +136,9 @@ au Filetype smarty set complete+=k
 au BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
 au Filetype ruby.rspec hi rspecGroupMethods term=underline ctermfg=110 guifg=#7aa6da
 
+set syntax=markdown
+au BufRead,BufNewFile *.md set filetype=markdown
+
 "
 " high light current line
 "
