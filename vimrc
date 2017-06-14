@@ -21,7 +21,7 @@ set t_Co=256
 "viと同期しない設定
 set nocompatible
 "改行の認識
-set fileformats=unix,dos,mac
+set fileformats=unix,mac,dos
 "音を消す
 set vb t_vb=
 
