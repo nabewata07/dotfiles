@@ -243,5 +243,30 @@ bindkey -e
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
 ## 起動時にnvm起動
 . ~/.nvm/nvm.sh
-nvm use 0.12.2
+nvm use v6.10.2
 eval "$(rbenv init -)"
+
+export GOPATH="$HOME/go"
+export PATH=$PATH:$GOPATH/bin
+
+# not allow homewbrew to send data to google analytics
+export HOMEBREW_NO_ANALYTICS=1
+
+eval "$(direnv hook zsh)"
+export PATH="/Users/nabewata07/.phpenv/bin:$PATH:./node_modules/.bin"
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export SOLR="$HOME/local/src/solr-6.5.1"
+eval "$(phpenv init -)"
+
+# for peco
+bindkey '^]' peco-src
+function peco-src() {
+  local src=$(ghq list --full-path | peco --query "$LBUFFER")
+  if [ -n "$src" ]; then
+    BUFFER="cd $src"
+    zle accept-line
+  fi
+  zle -R -c
+}
+
+zle -N peco-src
