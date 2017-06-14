@@ -251,9 +251,6 @@ export HOMEBREW_NO_ANALYTICS=1
 export GOPATH="$HOME/go"
 export PATH=$PATH:$GOPATH/bin
 
-# not allow homewbrew to send data to google analytics
-export HOMEBREW_NO_ANALYTICS=1
-
 eval "$(direnv hook zsh)"
 export PATH="/Users/nabewata07/.phpenv/bin:$PATH:./node_modules/.bin"
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
