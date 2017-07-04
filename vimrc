@@ -21,7 +21,7 @@ set t_Co=256
 "viと同期しない設定
 set nocompatible
 "改行の認識
-set fileformats=unix,dos,mac
+set fileformats=unix,mac,dos
 "音を消す
 set vb t_vb=
 
@@ -136,6 +136,9 @@ au Filetype smarty set complete+=k
 au BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
 au Filetype ruby.rspec hi rspecGroupMethods term=underline ctermfg=110 guifg=#7aa6da
 
+set syntax=markdown
+au BufRead,BufNewFile *.md set filetype=markdown
+
 "
 " high light current line
 "
@@ -189,6 +192,8 @@ if has("autocmd")
     autocmd FileType diff       setlocal sw=4 sts=4 ts=4 et
     autocmd FileType eruby      setlocal sw=4 sts=4 ts=4 et
     autocmd FileType html       setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType htmldjango.twig       setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType html.twig       setlocal sw=2 sts=2 ts=2 et
     autocmd FileType java       setlocal sw=4 sts=4 ts=4 et
     autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
     autocmd FileType perl       setlocal sw=4 sts=4 ts=4 et
@@ -462,8 +467,6 @@ NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'SQLUtilities'
 NeoBundle 'Align'
 NeoBundle 'majutsushi/tagbar'
-NeoBundle 'xolox/vim-easytags'
-NeoBundle 'xolox/vim-misc'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'elzr/vim-json'
@@ -641,8 +644,8 @@ let g:winresizer_start_key = '<C-E>'
 let g:quickrun_config = {}
 let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
 
-"let g:quickrun_config['ruby.rspec'] = {'command': 'bundle', 'cmdopt': 'exec rspec -cfd'}
-let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
+let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c', 'cmdopt': '-cfd'}
+" let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
 let g:quickrun_config['ruby'] = {'cmdopt': '-w'}
 
 autocmd BufRead,BufNewFile *_test.go set filetype=go.test
@@ -663,7 +666,8 @@ nmap <Space>k [quickrun]
 nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
 fun! QRunRspecCurrentLine()
   let line = line(".")
-  exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
+  " exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
+  exe ":QuickRun -exec 'bundle exec %c %s%o' -cmdopt ':" . line . " -cfd'"
 endfun
 " }}}
 
@@ -844,7 +848,7 @@ let g:tagbar_type_go = {
 \ }
 " }}}
 
-set tabpagemax=25
+set tabpagemax=60
 
 "================================================================================
 " 独自拡張を読み込む
