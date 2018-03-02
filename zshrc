@@ -241,21 +241,23 @@ bindkey -e
 #
 ## 独自環境用拡張
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
+
+export PATH="$PATH:$HOME/local/bin"
+
 ## 起動時にnvm起動
 . ~/.nvm/nvm.sh
 nvm use v6.10.2
+export PATH="$PATH:./node_modules/.bin"
 eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/shims:$PATH"
 
 # not allow homewbrew to send data to google analytics
 export HOMEBREW_NO_ANALYTICS=1
-export GOPATH="$HOME/go"
-export PATH=$PATH:$GOPATH/bin
 
-eval "$(direnv hook zsh)"
-export PATH="/Users/nabewata07/.phpenv/bin:$PATH:./node_modules/.bin"
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export SOLR="$HOME/local/src/solr-6.5.1"
-eval "$(phpenv init -)"
+# eval "$(phpenv init -)"
+# export PATH="$HOME/.phpenv/bin:$PATH"
 
 # for peco
 bindkey '^]' peco-src

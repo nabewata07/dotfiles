@@ -470,6 +470,8 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'elzr/vim-json'
+NeoBundle 'aklt/plantuml-syntax'
+NeoBundle 'plasticboy/vim-markdown'
 
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
