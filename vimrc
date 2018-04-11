@@ -452,14 +452,15 @@ NeoBundle 'Shougo/vimfiler.vim.git'
 NeoBundle 'w0rp/ale'
 NeoBundle 'gregsexton/gitv.git'
 
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 NeoBundle 'nanotech/jellybeans.vim.git'
 NeoBundle 'scrooloose/nerdcommenter.git'
 NeoBundle 'evidens/vim-twig.git'
