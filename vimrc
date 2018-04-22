@@ -470,6 +470,8 @@ NeoBundle 'Align'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'elzr/vim-json'
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'HerringtonDarkholme/yats.vim'
 
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
