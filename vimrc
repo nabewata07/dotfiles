@@ -40,6 +40,7 @@ set shortmess+=I
 
 set ruler number
 set number
+set undodir=~/tmp/vim
 " }}}
 
 " {{{ バックアップ関係
@@ -136,7 +137,6 @@ au Filetype smarty set complete+=k
 au BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
 au Filetype ruby.rspec hi rspecGroupMethods term=underline ctermfg=110 guifg=#7aa6da
 
-set syntax=markdown
 au BufRead,BufNewFile *.md set filetype=markdown
 
 "
@@ -449,7 +449,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'tpope/vim-fugitive.git'
 NeoBundle 'chriskempson/tomorrow-theme.git'
 NeoBundle 'Shougo/vimfiler.vim.git'
-NeoBundle 'scrooloose/syntastic'
+NeoBundle 'w0rp/ale'
 NeoBundle 'gregsexton/gitv.git'
 
 NeoBundle 'Shougo/vimproc', {
@@ -470,6 +470,8 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'elzr/vim-json'
+NeoBundle 'aklt/plantuml-syntax'
+NeoBundle 'plasticboy/vim-markdown'
 
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
@@ -644,7 +646,7 @@ let g:winresizer_start_key = '<C-E>'
 let g:quickrun_config = {}
 let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
 
-let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c', 'cmdopt': '-cfd'}
+let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o %s', 'cmdopt': '-cfd'}
 " let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
 let g:quickrun_config['ruby'] = {'cmdopt': '-w'}
 
@@ -713,19 +715,6 @@ function! AirlineThemePatch(palette)
     endfor
   endif
 endfunction
-" }}}
-
-" {{{ for syntastic
-let g:syntastic_python_checkers = ['pyflakes', 'pep8']
-" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-" let g:syntastic_mode_map = { 'mode': 'active',
-"             \ 'active_filetypes': ['ruby', 'ruby.rspec'] }
-" let g:syntastic_ruby_checkers = ['rubocop']
-" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-" let g:syntastic_go_checkers = ['go', 'golint']
-let g:syntastic_go_checkers = ['gometalinter']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " }}}
 
 if v:version > 703
