@@ -37,9 +37,9 @@
 #esac
 
 
-export LANG=ja_JP.UTF-8
-export LC_ALL=ja_JP.UTF-8
-export LC_CTYPE=ja_JP.UTF-8
+#export LANG=ja_JP.UTF-8
+#export LC_ALL=ja_JP.UTF-8
+#export LC_CTYPE=ja_JP.UTF-8
 #export LANG=ja_JP.eucJP
 #export LC_ALL=ja_JP.eucJP
 #export LC_CTYPE=ja_JP.eucJP
