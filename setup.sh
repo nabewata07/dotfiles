@@ -9,6 +9,7 @@ tmuxconf="tmux.conf"
 zshrc="zshrc"
 gitconfig="gitconfig"
 dircolors="dir_colors"
+dircolors="ctags"
 
 # The function to make symbolic link
 # Arguments
@@ -42,6 +43,7 @@ makeSymLink "${dir}.${tmuxconf}" "/${tmuxconf}"
 makeSymLink "${dir}.${zshrc}" "/${zshrc}"
 makeSymLink "${dir}.${dircolors}" "/${dircolors}"
 makeSymLink "${dir}.${gitconfig}" "/${gitconfig}"
+makeSymLink "${dir}.${ctags}" "/${ctags}"
 
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
