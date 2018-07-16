@@ -440,7 +440,7 @@ NeoBundle 'unite-font'
 NeoBundle 'surround.vim'
 NeoBundle 'pasela/unite-webcolorname.git'
 NeoBundle 'thinca/vim-quickrun.git'
-NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'othree/yajs.vim'
 NeoBundle 'digitaltoad/vim-jade.git'
 NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'jimsei/winresizer.git'
@@ -480,7 +480,7 @@ NeoBundle 'posva/vim-vue'
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
 " 'insert' : 1 はinsertモードのときに読み込まれる
-NeoBundleLazy 'Shougo/neosnippet.vim', {
+NeoBundle 'Shougo/neosnippet.vim', {
       \ 'depends' : ['Shougo/neosnippet-snippets'],
       \ 'insert' : 1,
       \ 'filetypes' : 'snippet',
@@ -859,6 +859,30 @@ vnoremap * "zy:let @/ = @z<CR>n
 " to show double quote in JSON file
 " with NeoBundle 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
+
+autocmd FileType vue syntax sync fromstart
+
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
+
+let g:neosnippet#snippets_directory = '$HOME/.vim/snippets/'
 
 "================================================================================
 " 独自拡張を読み込む
