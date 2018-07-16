@@ -475,6 +475,7 @@ NeoBundle 'aklt/plantuml-syntax'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'HerringtonDarkholme/yats.vim'
+NeoBundle 'posva/vim-vue'
 
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
@@ -842,15 +843,6 @@ let g:tagbar_type_go = {
 
 set tabpagemax=60
 
-"================================================================================
-" 独自拡張を読み込む
-" 独自拡張が優先させるため、このブロックは末尾に記載する事
-"================================================================================
-"
-if glob("$HOME/.vimrc_org") != ''
-  source $HOME/.vimrc_org
-endif
-
 " vim: foldmethod=marker:
 
 " {{{ previm plugin settings
@@ -867,3 +859,12 @@ vnoremap * "zy:let @/ = @z<CR>n
 " to show double quote in JSON file
 " with NeoBundle 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
+
+"================================================================================
+" 独自拡張を読み込む
+" 独自拡張が優先させるため、このブロックは末尾に記載する事
+"================================================================================
+"
+if glob("$HOME/.vimrc_org") != ''
+  source $HOME/.vimrc_org
+endif
