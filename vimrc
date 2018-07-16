@@ -472,11 +472,12 @@ NeoBundle 'fatih/vim-go'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'HerringtonDarkholme/yats.vim'
+NeoBundle 'posva/vim-vue'
 
 " 遅延読み込み
 " dependsは依存関係：Updateも一緒にされる
 " 'insert' : 1 はinsertモードのときに読み込まれる
-NeoBundleLazy 'Shougo/neosnippet.vim', {
+NeoBundle 'Shougo/neosnippet.vim', {
       \ 'depends' : ['Shougo/neosnippet-snippets'],
       \ 'insert' : 1,
       \ 'filetypes' : 'snippet',
@@ -839,15 +840,6 @@ let g:tagbar_type_go = {
 
 set tabpagemax=60
 
-"================================================================================
-" 独自拡張を読み込む
-" 独自拡張が優先させるため、このブロックは末尾に記載する事
-"================================================================================
-"
-if glob("$HOME/.vimrc_org") != ''
-  source $HOME/.vimrc_org
-endif
-
 " vim: foldmethod=marker:
 
 " {{{ previm plugin settings
@@ -864,3 +856,36 @@ vnoremap * "zy:let @/ = @z<CR>n
 " to show double quote in JSON file
 " with NeoBundle 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
+
+autocmd FileType vue syntax sync fromstart
+
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
+
+let g:neosnippet#snippets_directory = '$HOME/.vim/snippets/'
+
+"================================================================================
+" 独自拡張を読み込む
+" 独自拡張が優先させるため、このブロックは末尾に記載する事
+"================================================================================
+"
+if glob("$HOME/.vimrc_org") != ''
+  source $HOME/.vimrc_org
+endif
