@@ -1,0 +1,8 @@
+snippet     puts-debug
+abbr        debug-output
+  puts "${1} --------------------"
+  puts ($1)
+
+snippet logger
+  Rails.logger.debug '${1} ---------------------'
+  Rails.logger.debug ($1)

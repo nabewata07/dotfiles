@@ -108,318 +108,9 @@ set textwidth=0
 " ウィンドウの幅より長い行は折り返して、次の行に続けて表示する
 set wrap
 
-" extra space, 全角スペースの表示
-augroup HighlightTrailingSpaces
-  autocmd!
-  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=darkred ctermbg=darkred
-  autocmd VimEnter,WinEnter * match TrailingSpaces /\(\s\+$\|　\)/
-augroup END
-
-" 行番号を黄色に
-autocmd ColorScheme * hi LineNr ctermfg=yellow
-" diffの色の調整
-autocmd ColorScheme * hi DiffAdd term=bold cterm=bold ctermfg=254 ctermbg=237 gui=bold
-autocmd ColorScheme * hi DiffChange ctermfg=172 ctermbg=237
-autocmd ColorScheme * hi DiffDelete ctermfg=167 ctermbg=234
-autocmd ColorScheme * hi SpellBad ctermfg=white ctermbg=red
-
-"colorscheme BlackSea
-colorscheme Tomorrow-Night-Bright
-
 set lazyredraw
 
-"smarty シンタックスの設定
-au BufRead,BufNewFile *.tpl.* set filetype=smarty
-au Filetype smarty exec('set dictionary=$HOME/.vim/syntax/smarty.vim')
-au Filetype smarty set complete+=k
-
-"rspec シンタックスの設定
-au BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
-au Filetype ruby.rspec hi rspecGroupMethods term=underline ctermfg=110 guifg=#7aa6da
-
-au BufRead,BufNewFile *.md set filetype=markdown
-
-"
-" high light current line
-"
-au WinLeave * set nocursorline
-au WinEnter * set cursorline
-set cursorline "cursorcolumn
-
-" 80列以降を強調表示
-set textwidth=0
-if exists('&colorcolumn')
-    set colorcolumn=+1
-    " sh,cpp,perl,vim,...の部分は自分が使う
-    " プログラミング言語のfiletypeに合わせてください
-    autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme,php,ruby.rspec,javascript,go setlocal textwidth=80
-    highlight ColorColumn ctermbg=darkblue
-    highlight Todo ctermbg=darkyellow ctermfg=darkgreen
-endif
-
-nnoremap <F3> :echo expand("%:p")<CR>
-
-" }}}
-
-" {{{ Indent Settings
-"==============================
-" オートインデントを有効にする
-set autoindent
-set smartindent
-set cindent
-"Default setting
-set sw=2 sts=2 ts=2 et
-
-
-"==============================
-" setting in each file type
-" ts : タブが対応する空白の数
-" sts : タブやバックスペースの使用等の編集操作をするときに、タブが対応する空白の数
-" sw : インデントの各段階に使われる空白の数
-" et : タブにスペースを使う
-"==============================
-
-if has("autocmd")
-    filetype plugin on
-    filetype indent on
-
-    autocmd FileType apache     setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType aspvbs     setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType c          setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType cpp        setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType cs         setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType css        setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType diff       setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType eruby      setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType html       setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType htmldjango.twig       setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType html.twig       setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType java       setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType perl       setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType php        setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType python     setlocal sw=2 sts=2 ts=2 et textwidth=80 cinwords=if,elif,else,for,while,try,except,finally,def,class
-    autocmd FileType ruby       setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType ruby.rspec setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType haml       setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType sh         setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType sql        setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType vb         setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType vim        setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType wsh        setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType xhtml      setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType xml        setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType yaml       setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType zsh        setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType scala      setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType manifest   setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType go         setlocal tabstop=2 shiftwidth=2
-endif
-" }}}
-
-" {{{ 国際化関係
-"----------------------------------------------------
-" 文字コードの設定
-" fileencodingsの設定ではencodingの値を一番最後に記述する
-" Vimが内部処理に使用するエンコーディング
-set encoding=utf-8
-" 端末のエンコーディング
-set termencoding=utf-8
-" 現在開いているファイルのエンコーディング
-set fileencoding=utf-8
-"set fileencodings=ucs-bom,euc-jp,cp932,iso-2022-jp
-"set fileencodings+=,ucs-2le,ucs-2,utf-8
-
-"svnの時はutf-8に文字コードを設定
-autocmd FileType svn :set fileencoding=utf-8
-" }}}
-
-" {{{ ctags
-"----------------------------------------------------
-" 同じ関数名があった場合、どれに飛ぶか選択できるようにする
-nnoremap <C-]> g<C-]>
-
-" [tag tab] 新しいタブでジャンプ
-nnoremap tt :tab sp<CR> :exe("tjump ".expand('<cword>'))<CR>
-
-"taglist
-" let Tlist_Ctags_Cmd = "/usr/bin/ctags"    "ctagsのパス
-let Tlist_Show_One_File = 1               "現在編集中のソースのタグしか表示しない
-let Tlist_Exit_OnlyWindow = 1             "taglistのウィンドーが最後のウィンドーならばVimを閉じる
-let Tlist_Use_Right_Window = 1            "taglistを右側で開く
-" 現在のディレクトリから再帰的に上層のtagsファイルを探す
-" }}}
-
-" {{{ オートコマンド
-"----------------------------------------------------
-if has("autocmd")
-    " ファイルタイプ別インデント、プラグインを有効にする
-    filetype plugin indent on
-    " カーソル位置を記憶する
-    autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
-endif
-
-"<TAB>で補完
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<TAB>"
-    else
-        if pumvisible()
-            return "\<C-N>"
-        else
-            return "\<C-N>\<C-P>"
-        end
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-" }}}
-
-" {{{ キーマップ割り当てセクション
-"----------------------------------------------------
-nnoremap <C-n> gt
-nnoremap <C-p> gT
-nnoremap <F8> :NERDTreeFind<CR>
-"nnoremap <C-w>j :<C-w>j<ESC>:NERDTreeFind<CR>
-nnoremap <silent> <F9> :NERDTreeToggle<CR>
-nnoremap <silent> <F10> :TlistToggle<CR>
-nnoremap <silent> <F11> :VCSDiff<CR>
-nnoremap <silent> <F2> :VCSLog<CR>
-nnoremap <Space>s. :<C-u>source $HOME/.vimrc<CR>
-
-" autoclose
-inoremap (<CR> ()<Left>
-inoremap '<CR> ''<Left>
-inoremap "<CR> ""<Left>
-inoremap [<CR> []<Left>
-inoremap {<CR> {}<Left>
-inoremap <<CR> <><Left>
-" }}}
-
-" {{{ VCSDiff拡張 VCSDiffPast
-"-----------------------------------------------
-"svnでいくつ前のリビジョンかを指定して比較を行なう
-"listオプションを指定すれば一覧から選択形式で比較できる
-"
-"※HEADリビジョンを1としている
-"
-">>>>>>>>>>>>>>>>>> 使い方 <<<<<<<<<<<<<<<<<
-"
-"調べたいファイルをアクティブにして
-"コマンドモードで下記コマンドを実行する
-"
-":VCSDiffPast [-list] number
-"# [-list] はオプション(省略可)
-"# VCSDiff形式で比較
-"# number はHEADリビジョンを1としている
-"
-":VCSVimDiffPast [-list] number
-"# [-list] は一覧表示オプション(省略可)
-"# VCSVimDiff形式で比較
-"# number はHEADリビジョンを1としている
-"
-"
-">>>>>>>>>>>>>>>>>>> 例 <<<<<<<<<<<<<<<<<<<<
-"
-":VCSDiffPast 1
-"#最新バージョンのソースとVCSDiffで比較
-"#普通のVCSDiffと同じ
-"
-":VCSDiffPast 2
-"#最新バージョン前のバージョンのソースとVCSDiffで比較
-"
-":VCSDiffPast -list 20
-"#過去、20バージョンのリビジョン番号とコミッタ、日時を
-"#リスト形式で表示して、選択されたものと差異をVCSDiffで比較
-"
-":VCSVimDiffPast 1
-"#最新バージョンのソースとVCSVimDiffで比較
-"#普通のVCSVimDiffと同じ
-"
-":VCSVimDiffPast 3
-"#最新バージョン前の前のソースとVCSVimDiffで比較
-"
-":VCSVimDiffPast -list 15
-"#過去、15バージョンのリビジョン番号とコミッタ、日時を
-"#リスト形式で表示して、選択したものとの差異をVCSDiffで比較
-"
-"-----------------------------------------------
-com! -nargs=* VCSDiffPast call VCSDiffPast(<f-args>)
-com! -nargs=* VCSVimDiffPast call VCSVimDiffPast(<f-args>)
-
-function! VCSDiffPast(n,...)
-    if a:0 > 0 && a:n == "-list"
-        let rev = GetPastRevisionByList(a:1)
-    else
-        let rev = GetPastRevision(a:n)
-    endif
-    execute ":VCSDiff ".rev
-endfunction
-
-function! VCSVimDiffPast(n,...)
-    if a:0 > 0 && a:n == "-list"
-        let rev = GetPastRevisionByList(a:1)
-    else
-        let rev = GetPastRevision(a:n)
-    endif
-    execute ":VCSVimDiff ".rev
-endfunction
-
-function! GetPastRevision(n)
-    let f = expand("%:p")
-    let rev = system("svn log -q --limit ".a:n." ".f." |awk '$2{print $1}' | awk -v ORS='' 'NR==".a:n."{print $1}'")
-    return rev
-endfunction
-
-function! GetPastRevisionByList(n)
-    let f = expand("%:p")
-    let num = a:n < 1 ? 10 : a:n
-    let rev = system("svn log -q --limit ".num." ".f." |awk '$2{print $1 \" \" $3 \" \" $5}' | awk -v ORS=',' '{print NR-1\": \"$1\" \"$2\" \"$3}'")
-    let lines = split(rev,',')
-    let choice = inputlist(lines)
-    if choice >= 0 && choice < len(lines)
-        let r = split(lines[choice],' ')[1]
-    else
-        echo "どれかを選択してください"
-        let r = 0
-    endif
-    return r
-endfunction
-" }}}
-
-
-" {{{ 範囲移動
-"nnoremap <C-K> :m -2<CR>
-"nnoremap <C-J> :m +1<CR>
-vnoremap <C-K> :m -2<CR>v '<
-vnoremap <C-J> :m '>+1<CR>v '<
-" }}}
-
-" {{{ タブに{tabNo} - {window count}を表示する
-"---------------------------------------------------
-if v:version >= 700
-    function! TabLine()
-        let res = ''
-        let curtab = tabpagenr()
-        let i = 1
-        for i in range(1, tabpagenr('$'))
-            let res .= ((i == curtab) ? '%#TabLineSel#' : '%#TabLine#')
-            let res .= i . '-' . tabpagewinnr(i, '$') . ':'
-            let res .= substitute(bufname(tabpagebuflist(i)[0]), '.\+\/', '', 'g')
-            let res .= ' '
-            let i += 1
-            exe | endfor
-        let res .= '%#TabLineFill#'
-        return res
-    endfunction
-
-    set tabline=%!TabLine()
-
-endif
-" }}}
+set tabpagemax=60
 
 " {{{ NeoBundle Section
 "---------------------------------------------------
@@ -507,9 +198,168 @@ endif
 
 call neobundle#end()
 
-filetype plugin indent on
-
 NeoBundleCheck
+" }}}
+
+"
+" highlight current line
+"
+au WinLeave * set nocursorline
+au WinEnter * set cursorline
+set cursorline "cursorcolumn
+
+" extra space, 全角スペースの表示
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=darkred ctermbg=darkred
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\(\s\+$\|　\)/
+augroup END
+
+" 行番号を黄色に
+autocmd ColorScheme * hi LineNr ctermfg=yellow
+" diffの色の調整
+autocmd ColorScheme * hi DiffAdd term=bold cterm=bold ctermfg=254 ctermbg=237 gui=bold
+autocmd ColorScheme * hi DiffChange ctermfg=172 ctermbg=237
+autocmd ColorScheme * hi DiffDelete ctermfg=167 ctermbg=234
+autocmd ColorScheme * hi SpellBad ctermfg=white ctermbg=red
+
+colorscheme Tomorrow-Night-Bright
+
+filetype plugin on
+filetype indent on
+
+nnoremap <F3> :echo expand("%:p")<CR>
+
+" mark 80th column
+if exists('&colorcolumn')
+  set colorcolumn=+1
+  setlocal textwidth=80
+  highlight ColorColumn ctermbg=darkblue
+  highlight Todo ctermbg=darkyellow ctermfg=darkgreen
+endif
+
+" }}}
+
+" {{{ Indent Settings
+"==============================
+" オートインデントを有効にする
+set autoindent
+set smartindent
+set cindent
+
+
+"==============================
+"Default tab setting
+" ts : タブが対応する空白の数
+" sts : タブやバックスペースの使用等の編集操作をするときに、タブが対応する空白の数
+" sw : インデントの各段階に使われる空白の数
+" et : タブにスペースを使う
+"==============================
+set sw=2 sts=2 ts=2 et
+
+" }}}
+
+" {{{ 国際化関係
+"----------------------------------------------------
+" 文字コードの設定
+" Vimが内部処理に使用するエンコーディング
+set encoding=utf-8
+" 端末のエンコーディング
+set termencoding=utf-8
+" 現在開いているファイルのエンコーディング
+set fileencoding=utf-8
+" }}}
+
+" {{{ ctags
+"----------------------------------------------------
+" 同じ関数名があった場合、どれに飛ぶか選択できるようにする
+nnoremap <C-]> g<C-]>
+
+" [tag tab] 新しいタブでジャンプ
+nnoremap tt :tab sp<CR> :exe("tjump ".expand('<cword>'))<CR>
+
+"taglist
+" let Tlist_Ctags_Cmd = "/usr/bin/ctags"    "ctagsのパス
+let Tlist_Show_One_File = 1               "現在編集中のソースのタグしか表示しない
+let Tlist_Exit_OnlyWindow = 1             "taglistのウィンドーが最後のウィンドーならばVimを閉じる
+let Tlist_Use_Right_Window = 1            "taglistを右側で開く
+" 現在のディレクトリから再帰的に上層のtagsファイルを探す
+" }}}
+
+" {{{ オートコマンド
+"----------------------------------------------------
+" カーソル位置を記憶する
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+"<TAB>で補完
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<TAB>"
+    else
+        if pumvisible()
+            return "\<C-N>"
+        else
+            return "\<C-N>\<C-P>"
+        end
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+" }}}
+
+" {{{ キーマップ割り当てセクション
+"----------------------------------------------------
+nnoremap <C-n> gt
+nnoremap <C-p> gT
+nnoremap <F8> :NERDTreeFind<CR>
+"nnoremap <C-w>j :<C-w>j<ESC>:NERDTreeFind<CR>
+nnoremap <silent> <F9> :NERDTreeToggle<CR>
+nnoremap <silent> <F10> :TlistToggle<CR>
+nnoremap <silent> <F11> :VCSDiff<CR>
+nnoremap <silent> <F2> :VCSLog<CR>
+nnoremap <Space>s. :<C-u>source $HOME/.vimrc<CR>
+
+" autoclose
+inoremap (<CR> ()<Left>
+inoremap '<CR> ''<Left>
+inoremap "<CR> ""<Left>
+inoremap [<CR> []<Left>
+inoremap {<CR> {}<Left>
+inoremap <<CR> <><Left>
+" }}}
+
+
+" {{{ 範囲移動
+"nnoremap <C-K> :m -2<CR>
+"nnoremap <C-J> :m +1<CR>
+vnoremap <C-K> :m -2<CR>v '<
+vnoremap <C-J> :m '>+1<CR>v '<
+" }}}
+
+" {{{ タブに{tabNo} - {window count}を表示する
+"---------------------------------------------------
+if v:version >= 700
+    function! TabLine()
+        let res = ''
+        let curtab = tabpagenr()
+        let i = 1
+        for i in range(1, tabpagenr('$'))
+            let res .= ((i == curtab) ? '%#TabLineSel#' : '%#TabLine#')
+            let res .= i . '-' . tabpagewinnr(i, '$') . ':'
+            let res .= substitute(bufname(tabpagebuflist(i)[0]), '.\+\/', '', 'g')
+            let res .= ' '
+            let i += 1
+            exe | endfor
+        let res .= '%#TabLineFill#'
+        return res
+    endfunction
+
+    set tabline=%!TabLine()
+
+endif
 " }}}
 
 "  {{{ Unite Setting
@@ -694,7 +544,7 @@ function! s:open_junk_file()
 endfunction
 " }}}
 
-" {{{ Ruby jump do - end
+" {{{ enable match it to Extend matching with %
 "================================================================================
 source $VIMRUNTIME/macros/matchit.vim
 " }}}
@@ -841,8 +691,6 @@ let g:tagbar_type_go = {
 \ }
 " }}}
 
-set tabpagemax=60
-
 " vim: foldmethod=marker:
 
 " {{{ previm plugin settings
@@ -860,8 +708,11 @@ vnoremap * "zy:let @/ = @z<CR>n
 " with NeoBundle 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
 
-autocmd FileType vue syntax sync fromstart
+let g:neosnippet#snippets_directory = '$HOME/.vim/snippets/'
 
+" vim-vue plugin settings
+" TODO 都度実行しなくてもいい
+" vimrc読み込まれるときだけでいい
 let g:ft = ''
 function! NERDCommenter_before()
   if &ft == 'vue'
@@ -881,8 +732,6 @@ function! NERDCommenter_after()
     let g:ft = ''
   endif
 endfunction
-
-let g:neosnippet#snippets_directory = '$HOME/.vim/snippets/'
 
 "================================================================================
 " 独自拡張を読み込む
