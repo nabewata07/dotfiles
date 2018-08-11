@@ -180,7 +180,17 @@ setopt interactive_comments  # コマンドラインでも # 以降をコメン�
 
 # aliases
 alias ll="/bin/ls"
-alias ls="ll -alh --show-control-chars --color=auto -F"
+case ${OS_TYPE} in
+  darwin*)
+    alias ls="ll -alh -FG"
+
+    # not allow homewbrew to send data to google analytics
+    export HOMEBREW_NO_ANALYTICS=1
+    ;;
+  *)
+    alias ls="ll -alh --show-control-chars --color=auto -F"
+esac
+
 alias jobs='jobs -l'
 alias sc='screen'
 alias sudo='sudo env PATH=$PATH'
@@ -241,29 +251,36 @@ bindkey -e
 #
 ## 独自環境用拡張
 #[[ -s "$HOME/.zshrc_org" ]] && . "$HOME/.zshrc_org"
+
+export PATH="$PATH:$HOME/local/bin"
+
 ## 起動時にnvm起動
 . ~/.nvm/nvm.sh
 export PATH="$PATH:./node_modules/.bin"
 eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/shims:$PATH"
 
 export GOPATH="$HOME/go"
 export PATH=$PATH:$GOPATH/bin
 
-eval "$(direnv hook zsh)"
-export PATH="/Users/nabewata07/.phpenv/bin:$PATH:./node_modules/.bin"
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export SOLR="$HOME/local/src/solr-6.5.1"
-eval "$(phpenv init -)"
+# export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+# export SOLR="$HOME/local/src/solr-6.5.1"
+# eval "$(phpenv init -)"
+# export PATH="$HOME/.phpenv/bin:$PATH"
 
 # for peco
-bindkey '^]' peco-src
-function peco-src() {
-  local src=$(ghq list --full-path | peco --query "$LBUFFER")
-  if [ -n "$src" ]; then
-    BUFFER="cd $src"
-    zle accept-line
-  fi
-  zle -R -c
-}
+type peco > /dev/null
+peco_exists=$?
+if [ peco_exists = 0 ]; then
+  bindkey '^]' peco-src
+  function peco-src() {
+    local src=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$src" ]; then
+      BUFFER="cd $src"
+      zle accept-line
+    fi
+    zle -R -c
+  }
 
-zle -N peco-src
+  zle -N peco-src
+fi

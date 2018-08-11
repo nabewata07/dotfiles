@@ -25,3 +25,5 @@
   c = commit -v
 [core]
   excludefiles = ~/dotfiles/.gitignore
+[ghq]
+  root = ~/go
