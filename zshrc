@@ -180,7 +180,7 @@ setopt interactive_comments  # コマンドラインでも # 以降をコメン�
 
 # aliases
 alias ll="/bin/ls"
-case ${OS_TYPE} in
+case ${OSTYPE} in
   darwin*)
     alias ls="ll -alh -FG"
 
