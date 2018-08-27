@@ -4,7 +4,39 @@
 " @see :h fold
 " +++++++++++++++++++
 
-" !! vimは--with-lua を推奨 !!
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('~/.vim/bundles')
+  call dein#begin('~/.vim/bundles')
+
+  " You can specify revision/branch/tag.
+  "call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
+
+  call dein#load_toml('~/.vim/dein.toml', {'lazy': 0})
+  call dein#load_toml('~/.vim/dein_lazy.toml', {'lazy': 1})
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
 
 " {{{ 基本的な設定
 "----------------------------------------------------
@@ -18,8 +50,6 @@ noremap!  
 "256色に対応
 set t_Co=256
 
-"viと同期しない設定
-set nocompatible
 "改行の認識
 set fileformats=unix,mac,dos
 "音を消す
@@ -91,8 +121,6 @@ set laststatus=2
 set showmatch
 " 対応する括弧の表示時間を2にする
 set matchtime=2
-" シンタックスハイライトを有効にする
-syntax on
 " 検索結果文字列のハイライトを有効にする
 set hlsearch
 " Esc Esc でハイライトOFF
@@ -112,101 +140,14 @@ set lazyredraw
 
 set tabpagemax=60
 
-" {{{ NeoBundle Section
-"---------------------------------------------------
-if has('vim_starting')
-  set nocompatible               " be iMproved
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-NeoBundle 'unite.vim'
-NeoBundle 'unite-locate'
-NeoBundle 'unite-font'
-" NeoBundle 'unite-colorscheme'
-NeoBundle 'surround.vim'
-NeoBundle 'pasela/unite-webcolorname.git'
-NeoBundle 'thinca/vim-quickrun.git'
-NeoBundle 'othree/yajs.vim'
-NeoBundle 'digitaltoad/vim-jade.git'
-NeoBundle 'scrooloose/nerdtree.git'
-NeoBundle 'jimsei/winresizer.git'
-NeoBundle 'Keithbsmiley/rspec.vim'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'tpope/vim-fugitive.git'
-NeoBundle 'chriskempson/tomorrow-theme.git'
-NeoBundle 'Shougo/vimfiler.vim.git'
-NeoBundle 'w0rp/ale'
-NeoBundle 'gregsexton/gitv.git'
-
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-NeoBundle 'nanotech/jellybeans.vim.git'
-NeoBundle 'scrooloose/nerdcommenter.git'
-NeoBundle 'evidens/vim-twig.git'
-NeoBundle 'vim-jp/vimdoc-ja'
-NeoBundle 'SQLUtilities'
-NeoBundle 'Align'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'elzr/vim-json'
-NeoBundle 'aklt/plantuml-syntax'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'leafgarland/typescript-vim'
-NeoBundle 'HerringtonDarkholme/yats.vim'
-NeoBundle 'posva/vim-vue'
-
-" 遅延読み込み
-" dependsは依存関係：Updateも一緒にされる
-" 'insert' : 1 はinsertモードのときに読み込まれる
-NeoBundle 'Shougo/neosnippet.vim', {
-      \ 'depends' : ['Shougo/neosnippet-snippets'],
-      \ 'insert' : 1,
-      \ 'filetypes' : 'snippet',
-      \ 'unite_sources' : [
-      \ 'neosnippet', 'neosnippet/user', 'neosnippet/runtime'],
-      \ }
-
-function! s:meet_neocomplete_requirements()
-    return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
-endfunction
-
-if s:meet_neocomplete_requirements()
-    NeoBundleLazy 'Shougo/neocomplete.vim', {
-        \ 'depends' : 'Shougo/context_filetype.vim',
-        \ 'insert' : 1
-        \ }
-    NeoBundleFetch 'Shougo/neocomplcache.vim' " Bundle管理するけど読み込まない
-else
-    NeoBundleFetch 'Shougo/neocomplete.vim'
-    NeoBundle 'Shougo/neocomplcache.vim', {
-         \ 'insert' : 1
-         \ }
-endif
-
-call neobundle#end()
-
-NeoBundleCheck
-" }}}
-
 "
 " highlight current line
 "
-au WinLeave * set nocursorline
-au WinEnter * set cursorline
-set cursorline "cursorcolumn
+" au WinLeave * set nocursorline
+" au WinEnter * set cursorline
+" set cursorline "cursorcolumn
+
+colorscheme molokai
 
 " extra space, 全角スペースの表示
 augroup HighlightTrailingSpaces
@@ -215,28 +156,15 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter * match TrailingSpaces /\(\s\+$\|　\)/
 augroup END
 
-" 行番号を黄色に
-autocmd ColorScheme * hi LineNr ctermfg=yellow
-" diffの色の調整
-autocmd ColorScheme * hi DiffAdd term=bold cterm=bold ctermfg=254 ctermbg=237 gui=bold
-autocmd ColorScheme * hi DiffChange ctermfg=172 ctermbg=237
-autocmd ColorScheme * hi DiffDelete ctermfg=167 ctermbg=234
-autocmd ColorScheme * hi SpellBad ctermfg=white ctermbg=red
-
-colorscheme Tomorrow-Night-Bright
-
-filetype plugin on
-filetype indent on
-
 nnoremap <F3> :echo expand("%:p")<CR>
 
 " mark 80th column
-if exists('&colorcolumn')
-  set colorcolumn=+1
-  setlocal textwidth=80
-  highlight ColorColumn ctermbg=darkblue
-  highlight Todo ctermbg=darkyellow ctermfg=darkgreen
-endif
+" if exists('&colorcolumn')
+"   set colorcolumn=+1
+"   setlocal textwidth=80
+"   highlight ColorColumn ctermbg=darkblue
+"   highlight Todo ctermbg=darkyellow ctermfg=darkgreen
+" endif
 
 " }}}
 
@@ -293,33 +221,12 @@ autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
-
-"<TAB>で補完
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<TAB>"
-    else
-        if pumvisible()
-            return "\<C-N>"
-        else
-            return "\<C-N>\<C-P>"
-        end
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 " }}}
 
 " {{{ キーマップ割り当てセクション
 "----------------------------------------------------
 nnoremap <C-n> gt
 nnoremap <C-p> gT
-nnoremap <F8> :NERDTreeFind<CR>
-"nnoremap <C-w>j :<C-w>j<ESC>:NERDTreeFind<CR>
-nnoremap <silent> <F9> :NERDTreeToggle<CR>
-nnoremap <silent> <F10> :TlistToggle<CR>
-nnoremap <silent> <F11> :VCSDiff<CR>
-nnoremap <silent> <F2> :VCSLog<CR>
 nnoremap <Space>s. :<C-u>source $HOME/.vimrc<CR>
 
 " autoclose
@@ -329,14 +236,6 @@ inoremap "<CR> ""<Left>
 inoremap [<CR> []<Left>
 inoremap {<CR> {}<Left>
 inoremap <<CR> <><Left>
-" }}}
-
-
-" {{{ 範囲移動
-"nnoremap <C-K> :m -2<CR>
-"nnoremap <C-J> :m +1<CR>
-vnoremap <C-K> :m -2<CR>v '<
-vnoremap <C-J> :m '>+1<CR>v '<
 " }}}
 
 " {{{ タブに{tabNo} - {window count}を表示する
@@ -362,172 +261,6 @@ if v:version >= 700
 endif
 " }}}
 
-"  {{{ Unite Setting
-"---------------------------------------------------
-let g:unite_enable_start_insert = 1
-let g:unite_enable_split_vertically = 1
-"unite keymap prefix
-nnoremap [unite] <Nop>
-nmap <Space>u [unite]
-"register list
-nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register -default-action=yank<CR>
-"mru list
-nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
-"buffer list
-nnoremap <silent> [unite]b :<C-u>Unite buffer -default-action=vsplit<CR>
-"unite outline
-nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
-" }}}
-
-
-" {{{ neosnippet settings
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-" }}}
-
-" {{{ neocomplcache or neocomplete setting
-"---------------------------------------------------
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-
-if s:meet_neocomplete_requirements()
-  " Use neocomplete.
-  let g:neocomplete#enable_at_startup = 1
-else
-  " Use neocomplcache.
-  let g:neocomplcache_enable_at_startup = 1
-  " Use smartcase.
-  let g:neocomplcache_enable_smart_case = 1
-  " Use camel case completion.
-  let g:neocomplcache_enable_camel_case_completion = 1
-  " Use underbar completion.
-  let g:neocomplcache_enable_underbar_completion = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplcache_min_syntax_length = 3
-  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-  " Define dictionary.
-  let g:neocomplcache_dictionary_filetype_lists = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-      \ }
-
-  " Define keyword.
-  if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-  endif
-  let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-  inoremap <expr><C-g>     neocomplcache#undo_completion()
-  inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-  " Unite Snip
-  imap <C-s>  <Plug>(neosnippet_start_unite_snippet)
-
-  " SuperTab like snippets behavior.
-  "imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-
-  " Recommended key-mappings.
-  " <CR>: close popup and save indent.
-  inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-  " <TAB>: completion.
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-  inoremap <expr><C-y>  neocomplcache#close_popup()
-  inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-  " AutoComplPop like behavior.
-  "let g:neocomplcache_enable_auto_select = 1
-
-  " Shell like behavior(not recommended).
-  "set completeopt+=longest
-  "let g:neocomplcache_enable_auto_select = 1
-  "let g:neocomplcache_disable_auto_complete = 1
-  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
-  "inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-
-  " Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-  " Enable heavy omni completion.
-  if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
-  endif
-  "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-  "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-  let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-  let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-  let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-
-  " plugin rank
-  if !exists('g:neocomplcache_plugin_rank')
-    let g:neocomplcache_plugin_rank = {}
-  endif
-  let g:neocomplcache_plugin_rank.buffer_complete = 90
-endif
-" }}}
-
-" {{{ original value
-"================================================================================
-let g:winresizer_enable = 1
-let g:winresizer_start_key = '<C-E>'
-" }}}
-
-" {{{ quickrun settings
-"================================================================================
-let g:quickrun_config = {}
-let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
-
-let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o %s', 'cmdopt': '-cfd'}
-" let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
-let g:quickrun_config['ruby'] = {'cmdopt': '-w'}
-
-autocmd BufRead,BufNewFile *_test.go set filetype=go.test
-let g:quickrun_config['go.gotest'] = {'command': 'go test', 'cmdopt': '-run'}
-
-augroup GroupRspec
-  autocmd!
-  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-augroup END
-
-augroup GroupGoTest
-  autocmd!
-  autocmd BufWinEnter,BufNewFile *_test.go set filetype=go.gotest
-augroup END
-
-nnoremap [quickrun] <Nop>
-nmap <Space>k [quickrun]
-nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
-fun! QRunRspecCurrentLine()
-  let line = line(".")
-  " exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
-  exe ":QuickRun -exec 'bundle exec %c %s%o' -cmdopt ':" . line . " -cfd'"
-endfun
-" }}}
-
-
 " {{{ Open junk file.
 "================================================================================
 command! -nargs=0 JunkFile call s:open_junk_file()
@@ -549,44 +282,13 @@ endfunction
 source $VIMRUNTIME/macros/matchit.vim
 " }}}
 
-" {{{ NerdTree settings
-"引数なしでvimを開いたらNERDTreeを起動，ありなら起動しない
-let file_name = expand("%")
-if has('vim_starting') &&  file_name == ""
-  if file_name == ""
-    autocmd VimEnter * NERDTree ./
-  endif
-endif
-
-" }}}
-
-" {{{ vim-airline color settings
-let g:airline_theme_patch_func = 'AirlineThemePatch'
-function! AirlineThemePatch(palette)
-  if g:airline_theme == 'tomorrow'
-    for colors in values(a:palette.inactive)
-      let colors[3] = 245
-    endfor
-  endif
-endfunction
-" }}}
-
 if v:version > 703
   set regexpengine=1
 endif
 
-" {{{ for nerdcommenter
-let NERDSpaceDelims = 1
-nmap ,, <Plug>NERDCommenterToggle
-vmap ,, <Plug>NERDCommenterToggle
-
-" }}}
-
 " Edit file by tabedit.
-let g:vimfiler_edit_action = 'tabopen'
-
-call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
-
+" TODO enable if VimFiler is installed
+" let g:vimfiler_edit_action = 'tabopen'
 
 " {{{ 各タブページのカレントバッファ名+αを表示
 function! s:tabpage_label(n)
@@ -695,11 +397,6 @@ let g:tagbar_type_go = {
 
 " {{{ previm plugin settings
 "---------------------------------------------------
-let g:previm_open_cmd = 'open -a Google\ Chrome'
-augroup PrevimSettings
-    autocmd!
-    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-augroup END
 " }}}
 
 vnoremap * "zy:let @/ = @z<CR>n
@@ -707,31 +404,6 @@ vnoremap * "zy:let @/ = @z<CR>n
 " to show double quote in JSON file
 " with NeoBundle 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
-
-let g:neosnippet#snippets_directory = '$HOME/.vim/snippets/'
-
-" vim-vue plugin settings
-" TODO 都度実行しなくてもいい
-" vimrc読み込まれるときだけでいい
-let g:ft = ''
-function! NERDCommenter_before()
-  if &ft == 'vue'
-    let g:ft = 'vue'
-    let stack = synstack(line('.'), col('.'))
-    if len(stack) > 0
-      let syn = synIDattr((stack)[0], 'name')
-      if len(syn) > 0
-        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
-      endif
-    endif
-  endif
-endfunction
-function! NERDCommenter_after()
-  if g:ft == 'vue'
-    setf vue
-    let g:ft = ''
-  endif
-endfunction
 
 "================================================================================
 " 独自拡張を読み込む
