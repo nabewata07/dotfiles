@@ -4,40 +4,6 @@
 " @see :h fold
 " +++++++++++++++++++
 
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
-" Required:
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
-
-" Required:
-if dein#load_state('~/.vim/bundles')
-  call dein#begin('~/.vim/bundles')
-
-  " You can specify revision/branch/tag.
-  "call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
-
-  call dein#load_toml('~/.vim/dein.toml', {'lazy': 0})
-  call dein#load_toml('~/.vim/dein_lazy.toml', {'lazy': 1})
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-
-" Required:
-filetype plugin indent on
-syntax enable
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
-"End dein Scripts-------------------------
-
 " {{{ 基本的な設定
 "----------------------------------------------------
 "leader
@@ -139,6 +105,40 @@ set wrap
 set lazyredraw
 
 set tabpagemax=60
+
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('~/.vim/bundles')
+  call dein#begin('~/.vim/bundles')
+
+  " You can specify revision/branch/tag.
+  "call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
+
+  call dein#load_toml('~/.vim/dein.toml', {'lazy': 0})
+  call dein#load_toml('~/.vim/dein_lazy.toml', {'lazy': 1})
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
 
 "
 " highlight current line
@@ -333,71 +333,6 @@ endfunction
 set tabline=%!MakeTabLine()
 " }}}
 
-" {{{ vim-go setting
-" By default syntax-highlighting for Functions, Methods and Structs is disabled.
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-" Enable goimports to automatically insert import paths instead of gofmt:
-let g:go_fmt_command = "goimports"
-
-" By default vim-go shows errors for the fmt command, to disable it:
-" let g:go_fmt_fail_silently = 1
-
-" Disable auto fmt on save:
-let g:go_fmt_autosave = 0
-
-" Disable opening browser after posting your snippet to play.golang.org:
-" let g:go_play_open_browser = 0
-
-autocmd filetype go autocmd QuitPre <buffer> GoFmt
-autocmd filetype go.test autocmd QuitPre <buffer> GoFmt
-" autocmd filetype go autocmd BufWritePre <buffer> GoLint
-
-let g:go_metalinter_enabled = 1
-
-nnoremap <C-g> :GoErrCheck<CR>
-" }}}
-
-" {{{ gotags setting
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-" }}}
-
-" vim: foldmethod=marker:
-
-" {{{ previm plugin settings
-"---------------------------------------------------
-" }}}
 
 vnoremap * "zy:let @/ = @z<CR>n
 
