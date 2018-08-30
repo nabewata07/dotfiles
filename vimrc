@@ -238,29 +238,6 @@ inoremap {<CR> {}<Left>
 inoremap <<CR> <><Left>
 " }}}
 
-" {{{ タブに{tabNo} - {window count}を表示する
-"---------------------------------------------------
-if v:version >= 700
-    function! TabLine()
-        let res = ''
-        let curtab = tabpagenr()
-        let i = 1
-        for i in range(1, tabpagenr('$'))
-            let res .= ((i == curtab) ? '%#TabLineSel#' : '%#TabLine#')
-            let res .= i . '-' . tabpagewinnr(i, '$') . ':'
-            let res .= substitute(bufname(tabpagebuflist(i)[0]), '.\+\/', '', 'g')
-            let res .= ' '
-            let i += 1
-            exe | endfor
-        let res .= '%#TabLineFill#'
-        return res
-    endfunction
-
-    set tabline=%!TabLine()
-
-endif
-" }}}
-
 " {{{ Open junk file.
 "================================================================================
 command! -nargs=0 JunkFile call s:open_junk_file()
@@ -291,54 +268,51 @@ endif
 " let g:vimfiler_edit_action = 'tabopen'
 
 " {{{ 各タブページのカレントバッファ名+αを表示
-function! s:tabpage_label(n)
-  " t:title と言う変数があったらそれを使う
-  let title = gettabvar(a:n, 'title')
-  if title !=# ''
-    return title
-  endif
+ function! s:tabpage_label(n)
+   " t:title と言う変数があったらそれを使う
+   let title = gettabvar(a:n, 'title')
+   if title !=# ''
+     return title
+   endif
 
-  " タブページ内のバッファのリスト
-  let bufnrs = tabpagebuflist(a:n)
+   " タブページ内のバッファのリスト
+   let bufnrs = tabpagebuflist(a:n)
 
-  " カレントタブページかどうかでハイライトを切り替える
-  let hi = a:n is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+   " カレントタブページかどうかでハイライトを切り替える
+   let hi = a:n is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
 
-  " バッファが複数あったらバッファ数を表示
-  let no = len(bufnrs)
-  if no is 1
-    let no = ''
-  endif
-  " タブページ内に変更ありのバッファがあったら '+' を付ける
-  let mod = len(filter(copy(bufnrs), 'getbufvar(v:val, "&modified")')) ? '+' : ''
-  let sp = (no . mod) ==# '' ? '' : ' '  " 隙間空ける
+   " バッファが複数あったらバッファ数を表示
+   let no = len(bufnrs)
+   if no is 1
+     let no = ''
+   endif
+   " タブページ内に変更ありのバッファがあったら '+' を付ける
+   let mod = len(filter(copy(bufnrs), 'getbufvar(v:val, "&modified")')) ? '+' : ''
+   let sp = (no . mod) ==# '' ? '' : ' '  " 隙間空ける
 
-  " カレントバッファ
-  let curbufnr = bufnrs[tabpagewinnr(a:n) - 1]  " tabpagewinnr() は 1 origin
-  let fname = pathshorten(bufname(curbufnr))
+   " カレントバッファ
+   let curbufnr = bufnrs[tabpagewinnr(a:n) - 1]  " tabpagewinnr() は 1 origin
+   let fname = a:n . '-' . tabpagewinnr(a:n, '$') . ':'
+   let fname .= pathshorten(bufname(curbufnr))
 
-  let label = no . mod . sp . fname
+   let label = mod . sp . fname
 
-  return '%' . a:n . 'T' . hi . label . '%T%#TabLineFill#'
-endfunction
+   return '%' . a:n . 'T' . hi . label . '%T%#TabLineFill#'
+ endfunction
 
-function! MakeTabLine()
-  let titles = map(range(1, tabpagenr('$')), 's:tabpage_label(v:val)')
-  let sep = ''  " タブ間の区切りなし
-  let tabpages = join(titles, sep) . sep . '%#TabLineFill#%T'
-  let info = ''  " 好きな情報を入れる
-  return tabpages . '%=' . info  " タブリストを左に、情報を右に表示
-endfunction
+ function! MakeTabLine()
+   let titles = map(range(1, tabpagenr('$')), 's:tabpage_label(v:val)')
+   let sep = ' '  " タブ間の区切り
+   let tabpages = join(titles, sep) . sep . '%#TabLineFill#%T'
+   let info = ''  " 好きな情報を入れる
+   return tabpages . '%=' . info  " タブリストを左に、情報を右に表示
+ endfunction
 
-set tabline=%!MakeTabLine()
+ set tabline=%!MakeTabLine()
 " }}}
 
 
 vnoremap * "zy:let @/ = @z<CR>n
-
-" to show double quote in JSON file
-" with NeoBundle 'elzr/vim-json'
-let g:vim_json_syntax_conceal = 0
 
 "================================================================================
 " 独自拡張を読み込む
