@@ -271,7 +271,7 @@ export PATH=$PATH:$GOPATH/bin
 # for peco
 type peco > /dev/null
 peco_exists=$?
-if [ peco_exists = 0 ]; then
+if [ $peco_exists = 0 ]; then
   bindkey '^]' peco-src
   function peco-src() {
     local src=$(ghq list --full-path | peco --query "$LBUFFER")
