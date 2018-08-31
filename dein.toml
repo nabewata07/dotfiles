@@ -99,6 +99,3 @@ hook_add = '''
     endif
   endfunction
 '''
-
-[[plugins]]
-repo = 'posva/vim-vue'

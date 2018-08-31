@@ -9,6 +9,7 @@ hook_source = 'call deoplete#enable()'
 
 [[plugins]]
 repo = 'othree/yajs.vim'
+on_ft = 'javascript'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
@@ -27,6 +28,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
+on_ft = 'markdown'
 
 [[plugins]]
 repo = 'aklt/plantuml-syntax'
@@ -151,4 +153,9 @@ hook_source = '''
 
 [[plugins]]
 repo = 'elzr/vim-json'
+on_ft = 'json'
 hook_add = 'let g:vim_json_syntax_conceal = 0'
+
+[[plugins]]
+repo = 'posva/vim-vue'
+on_ft = 'vue'
