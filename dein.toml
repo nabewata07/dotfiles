@@ -99,3 +99,6 @@ hook_add = '''
     endif
   endfunction
 '''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
