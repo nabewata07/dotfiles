@@ -176,3 +176,11 @@ hook_add = 'let g:vim_json_syntax_conceal = 0'
 [[plugins]]
 repo = 'posva/vim-vue'
 on_ft = 'vue'
+
+[[plugins]]
+repo  = 'leafgarland/typescript-vim'
+on_ft = 'typescript'
+
+[[plugins]]
+repo  = 'Quramy/tsuquyomi'
+on_ft = 'typescript'
