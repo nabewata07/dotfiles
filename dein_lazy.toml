@@ -59,16 +59,6 @@ repo = 'roxma/nvim-yarp'
 on_if = '!has("nvim")'
 
 [[plugins]]
-repo = 'kannokanno/previm'
-hook_add = '''
-  let g:previm_open_cmd = 'open -a Google\ Chrome'
-  augroup PrevimSettings
-      autocmd!
-      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-  augroup END
-'''
-
-[[plugins]]
 repo = 'Shougo/neosnippet.vim'
 depends = ['neosnippet-snippets', 'context_filetype.vim']
 on_event = 'InsertCharPre'
