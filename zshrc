@@ -284,3 +284,5 @@ if [ $peco_exists = 0 ]; then
 
   zle -N peco-src
 fi
+
+export LESSCHARSET=utf-8
