@@ -314,6 +314,15 @@ endif
 
 vnoremap * "zy:let @/ = @z<CR>n
 
+
+let file_name = expand("%")
+if has('vim_starting') &&  file_name == ""
+  if file_name == ""
+    autocmd VimEnter * NERDTree ./
+  endif
+endif
+
+let g:NERDTreeNodeDelimiter = "\u00a0"
 "================================================================================
 " 独自拡張を読み込む
 " 独自拡張が優先させるため、このブロックは末尾に記載する事
