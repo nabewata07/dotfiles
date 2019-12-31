@@ -2,29 +2,6 @@
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-on_if = 'vimrc#meet_deoplete_requirements()'
-depends = 'context_filetype.vim'
-on_event = 'InsertEnter'
-hook_source = 'call deoplete#enable()'
-
-[[plugins]]
-repo = 'Shougo/neocomplete'
-depends = 'context_filetype.vim'
-on_if = '!vimrc#meet_deoplete_requirements() && vimrc#meet_neocomplete_requirements()'
-on_event = 'InsertEnter'
-hook_source = '''
-  " Disable AutoComplPop.
-  let g:acp_enableAtStartup = 0
-  " Use neocomplete.
-  let g:neocomplete#enable_at_startup = 1
-  " Use smartcase.
-  let g:neocomplete#enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
-'''
-
-[[plugins]]
 repo = 'othree/yajs.vim'
 on_ft = 'javascript'
 
@@ -46,6 +23,7 @@ hook_add = '''
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
 on_ft = 'markdown'
+hook_add = 'let g:vim_markdown_conceal = 0'
 
 [[plugins]]
 repo = 'aklt/plantuml-syntax'

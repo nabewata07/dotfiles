@@ -49,7 +49,8 @@ hook_add = '''
 
   " let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o %s', 'cmdopt': '-cfd'}
   let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
-  let g:quickrun_config['ruby'] = {'cmdopt': '-w'}
+  " let g:quickrun_config['ruby'] = {'cmdopt': '-w'}
+  let g:quickrun_config['ruby'] = {'cmdopt': '-w', 'command': 'ruby', 'exec': 'bundle exec %c %o %s'}
 
   autocmd BufRead,BufNewFile *_test.go set filetype=go.test
   let g:quickrun_config['go.gotest'] = {'command': 'go test', 'cmdopt': '-run'}

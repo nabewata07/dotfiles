@@ -26,4 +26,4 @@
 [core]
   excludefiles = ~/dotfiles/.gitignore
 [ghq]
-  root = ~/go
+  root = ~/go/src
