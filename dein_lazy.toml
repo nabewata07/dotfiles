@@ -11,13 +11,6 @@ hook_add = '''
   nnoremap <F8> :NERDTreeFind<CR>
   "nnoremap <C-w>j :<C-w>j<ESC>:NERDTreeFind<CR>
   nnoremap <silent> <F9> :NERDTreeToggle<CR>
-
-  let file_name = expand("%")
-  if has('vim_starting') &&  file_name == ""
-    if file_name == ""
-      autocmd VimEnter * NERDTree ./
-    endif
-  endif
 '''
 
 [[plugins]]
@@ -152,3 +145,7 @@ on_ft = 'typescript'
 [[plugins]]
 repo  = 'Quramy/tsuquyomi'
 on_ft = 'typescript'
+
+[[plugins]]
+repo = 'nelsyeung/twig.vim'
+on_ft = 'twig'
