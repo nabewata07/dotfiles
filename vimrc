@@ -129,6 +129,21 @@ if dein#load_state('~/.vim/bundles')
   call dein#save_state()
 endif
 
+if vimrc#meet_deoplete_requirements()
+  call dein#add('Shougo/deoplete.nvim')
+  let g:deoplete#enable_at_startup = 1
+elseif vimrc#meet_neocomplete_requirements()
+  call dein#add('Shougo/neocomplete')
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:neocomplete#enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+end
+
 " Required:
 filetype plugin indent on
 syntax enable
