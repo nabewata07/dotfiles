@@ -1,9 +1,5 @@
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
-
-[[plugins]]
-repo = 'othree/yajs.vim'
-on_ft = 'javascript'
+# [[plugins]]
+# repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
@@ -21,79 +17,13 @@ hook_add = 'let g:vim_markdown_conceal = 0'
 [[plugins]]
 repo = 'aklt/plantuml-syntax'
 
-[[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
-on_if = '!has("nvim")'
+# [[plugins]]
+# repo = 'roxma/vim-hug-neovim-rpc'
+# on_if = '!has("nvim")'
 
-[[plugins]]
-repo = 'roxma/nvim-yarp'
-on_if = '!has("nvim")'
-
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
-depends = ['neosnippet-snippets', 'context_filetype.vim']
-on_event = 'InsertCharPre'
-on_ft = 'snippet'
-hook_source = '''
-  " Plugin key-mappings.
-  " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-  " SuperTab like snippets behavior.
-  " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-  "imap <expr><TAB>
-  " \ pumvisible() ? "\<C-n>" :
-  " \ neosnippet#expandable_or_jumpable() ?
-  " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-  let g:neosnippet#snippets_directory = '~/.vim/snippets'
-
-
-  " For conceal markers.
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
-'''
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
-repo = 'fatih/vim-go'
-on_ft = 'go'
-hook_add = '''
-  " By default syntax-highlighting for Functions, Methods and Structs is disabled.
-  let g:go_highlight_functions = 1
-  let g:go_highlight_methods = 1
-  let g:go_highlight_structs = 1
-  let g:go_highlight_interfaces = 1
-  let g:go_highlight_operators = 1
-  let g:go_highlight_build_constraints = 1
-
-  " Enable goimports to automatically insert import paths instead of gofmt:
-  let g:go_fmt_command = "goimports"
-
-  " By default vim-go shows errors for the fmt command, to disable it:
-  " let g:go_fmt_fail_silently = 1
-
-  " Disable auto fmt on save:
-  let g:go_fmt_autosave = 0
-
-  " Disable opening browser after posting your snippet to play.golang.org:
-  " let g:go_play_open_browser = 0
-
-  autocmd filetype go autocmd QuitPre <buffer> GoFmt
-  autocmd filetype go.test autocmd QuitPre <buffer> GoFmt
-  " autocmd filetype go autocmd BufWritePre <buffer> GoLint
-
-  let g:go_metalinter_enabled = 1
-
-  nnoremap <C-g> :GoErrCheck<CR>
-'''
+# [[plugins]]
+# repo = 'roxma/nvim-yarp'
+# on_if = '!has("nvim")'
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
@@ -128,28 +58,3 @@ hook_source = '''
       \ 'ctagsargs' : '-sort -silent'
   \ }
 '''
-
-[[plugins]]
-repo = 'elzr/vim-json'
-on_ft = 'json'
-hook_add = 'let g:vim_json_syntax_conceal = 0'
-
-[[plugins]]
-repo = 'posva/vim-vue'
-on_ft = 'vue'
-
-[[plugins]]
-repo  = 'leafgarland/typescript-vim'
-on_ft = 'typescript'
-
-[[plugins]]
-repo  = 'Quramy/tsuquyomi'
-on_ft = 'typescript'
-
-[[plugins]]
-repo = 'nelsyeung/twig.vim'
-on_ft = 'twig'
-
-[[plugins]]
-repo = 'keith/rspec.vim'
-on_ft = 'ruby.rspec'
