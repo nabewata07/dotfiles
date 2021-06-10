@@ -108,6 +108,9 @@ hook_add = '''
 repo = 'cespare/vim-toml'
 
 [[plugins]]
+repo = 'keith/rspec.vim'
+
+[[plugins]]
 repo = 'kannokanno/previm'
 hook_add = '''
   let g:previm_open_cmd = 'open -a Google\ Chrome'
