@@ -30,6 +30,7 @@ augroup GroupGoTest
   autocmd BufWinEnter,BufNewFile *_test.go set filetype=go.gotest
 augroup END
 
+nnoremap <Leader>r <Plug>(quickrun)
 nnoremap [quickrun] <Nop>
 nmap <Space>k [quickrun]
 nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
