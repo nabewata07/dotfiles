@@ -45,9 +45,6 @@ makeSymLink "${dir}.${dircolors}" "/${dircolors}"
 makeSymLink "${dir}.${gitconfig}" "/${gitconfig}"
 makeSymLink "${dir}.${ctags}" "/${ctags}"
 
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh ~/.vim/bundles
-
 mkdir ~/.zsh
 mkdir -p ~/tmp/vim
 
