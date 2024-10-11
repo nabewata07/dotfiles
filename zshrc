@@ -255,7 +255,7 @@ bindkey -e
 export PATH="$PATH:$HOME/local/bin"
 
 ## 起動時にnvm起動
-. ~/.nvm/nvm.sh
+# . ~/.nvm/nvm.sh
 export PATH="$PATH:./node_modules/.bin"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/shims:$PATH"

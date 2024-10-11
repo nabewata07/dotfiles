@@ -1,0 +1,15 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+n",
+        // move to next text editor
+        "command": "workbench.action.nextEditor",
+        "when": "editorTextFocus && neovim.init && focusedView == 'workbench.panel.output' && neovim.mode != 'insert"
+    },
+    {
+        "key": "ctrl+p",
+        // move to next text editor
+        "command": "workbench.action.previousEditor",
+        "when": "editorTextFocus && neovim.init && focusedView == 'workbench.panel.output' && neovim.mode != 'insert"
+    }
+]
