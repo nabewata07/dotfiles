@@ -1,2 +1,4 @@
 *.sw[p|o|n|m]
 bundles
+autoload/
+plugged/

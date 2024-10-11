@@ -45,10 +45,20 @@ makeSymLink "${dir}.${dircolors}" "/${dircolors}"
 makeSymLink "${dir}.${gitconfig}" "/${gitconfig}"
 makeSymLink "${dir}.${ctags}" "/${ctags}"
 
+# OS判定
+OS_TYPE=$(uname)
+
+if [[ "$OS_TYPE" == "Darwin" ]]; then
+    echo "Running on Mac OS"
+
+    ln -s "~/dotfiles/settings.json" "~/Library/Application Support/Code/User/settings.json"
+    ln -s "~/dotfiles/keybindings.json" "~/Library/Application Support/Code/User/keybindings.json"
+    echo "Symbolic link created successfully!"
+else
+    echo "This script is designed for Mac OS only. Your OS is: $OS_TYPE"
+    exit 1
+fi
+
+
 mkdir ~/.zsh
 mkdir -p ~/tmp/vim
-
-# set dotfiles repository user and email
-cd ~/dotfiles
-git config user.name "nabewata"
-git config user.email "channel.momo@gmail.com"
