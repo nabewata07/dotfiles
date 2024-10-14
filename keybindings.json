@@ -1,15 +1,83 @@
 // Place your key bindings in this file to override the defaults
 [
-    {
-        "key": "ctrl+n",
-        // move to next text editor
-        "command": "workbench.action.nextEditor",
-        "when": "editorTextFocus && neovim.init && focusedView == 'workbench.panel.output' && neovim.mode != 'insert"
-    },
-    {
-        "key": "ctrl+p",
-        // move to next text editor
-        "command": "workbench.action.previousEditor",
-        "when": "editorTextFocus && neovim.init && focusedView == 'workbench.panel.output' && neovim.mode != 'insert"
-    }
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.previousEditor",
+    "when": "vim.active && !editorFocus && !terminalFocus"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.previousEditor",
+    "when": "vim.active && vim.mode == 'Normal' && editorFocus"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "workbench.action.nextEditor",
+    "when": "vim.active && !editorFocus && !terminalFocus"
+  },
+  {
+    "key": "ctrl+w ctrl+w",
+    "command": "workbench.action.focusNextGroup",
+    "when": "vim.active && !editorFocus && !terminalFocus"
+  },
+  {
+    "key": "ctrl+w ctrl+w",
+    "command": "workbench.action.focusNextGroup",
+    "when": "vim.active && vim.mode == 'Normal' && editorFocus"
+  },
+  {
+    "key": "u",
+    "command": "undo",
+    "when": "vim.active && vim.mode == 'Normal' && editorFocus"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "redo",
+    "when": "vim.active && vim.mode == 'Normal' && editorFocus"
+  },
+  {
+    "key": "cmd+l",
+    "command": "extension.runLineOnRspec",
+    "when": "editorLangId == 'ruby'"
+  },
+  {
+    "key": "cmd+alt+l",
+    "command": "extension.runFileOnRspec",
+    "when": "editorLangId == 'ruby'"
+  },
+  {
+    "key": "ctrl+g d",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor && vim.active && vim.mode in ['Normal', 'Visual']"
+  },
+  {
+    "key": "f12",
+    "command": "-editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
+  {
+    "key": "ctrl+g r",
+    "command": "editor.action.goToReferences",
+    "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isEmbeddedEditor && vim.active && vim.mode in ['Normal', 'Visual']"
+  },
+  {
+    "key": "shift+f12",
+    "command": "-editor.action.goToReferences",
+    "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+  },
+  {
+    "key": "ctrl+g o",
+    "command": "gitlens.openFileOnRemote",
+    "when": "editorTextFocus && vim.active && vim.mode in ['Normal', 'Visual']"
+  },
+  {
+    "key": "ctrl+g c",
+    "command": "gitlens.diffWithRevisionFrom",
+    "when": "editorTextFocus && vim.active && vim.mode in ['Normal', 'Visual']"
+  },
+  {
+    "key": "ctrl+g i",
+    "command": "editor.action.goToImplementasion",
+    "when": "editorTextFocus && vim.active && vim.mode in ['Normal', 'Visual']"
+  }
 ]
