@@ -286,3 +286,5 @@ if [ $peco_exists = 0 ]; then
 fi
 
 export LESSCHARSET=utf-8
+
+# export GITHUB_TOKEN=$(cat ~/.github_token)
