@@ -1,10 +1,99 @@
 {
-    "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
-    },
-    "vscode-neovim.compositeKeys": {
-        "jk": {
-            "command": "vscode-neovim.escape"
-        }
+  "vim.leader": ",",
+  "vim.hlsearch": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "k"],
+      "after": ["<ESC>"]
     }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<C-n>"],
+      "after": ["g", "t"]
+    },
+    {
+      "before": ["<C-p>"],
+      "after": ["g", "T"]
+    },
+    {
+      "before": ["<Esc>", "<Esc>"],
+      "after": [":nohl"]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["<leader>", "<leader>"],
+      "commands": ["editor.action.commentLine"],
+      "when": "editorTextFocus && !editorReadonly"
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["<leader>", "<leader>"],
+      "commands": ["editor.action.commentLine"],
+      "when": "editorTextFocus && !editorReadonly"
+    }
+  ],
+  "workbench.editor.enablePreviewFromCodeNavigation": true,
+  "workbench.editor.enablePreview": false,
+  "editor.tabSize": 2,
+  "editor.stickyScroll.enabled": true,
+  "[sql]": {
+    "editor.defaultFormatter": "cweijan.vscode-postgresql-client2"
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.inlineSuggest.enabled": true,
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp",
+    "editor.formatOnType": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "files.rulers": [
+      120
+    ],
+    "editor.semanticHighlighting.enabled": true,
+    "editor.formatOnSave": false
+  },
+  "files.associations": {
+    "*.inc": "php"
+  },
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": true,
+    "typescript": true,
+    "ruby": true,
+    "python": true,
+    "php": true,
+    "json": true,
+    "javascript": true,
+    "editorconfig": true,
+    "jsonc": true,
+    "dockerfile": true,
+    "go": true,
+    "dockercompose": true,
+    "shellscript": true,
+    "vimrc": true,
+    "makefile": true,
+    "sql": true,
+    "yaml": true
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "workbench.editor.labelFormat": "medium",
+  "editor.wordWrap": "on",
+  "workbench.editorAssociations": {
+    "*.csv": "default"
+  },
+  "files.autoGuessEncoding": true,
+  "window.zoomLevel": 1,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "workbench.colorTheme": "Spinel",
+  "files.insertFinalNewline": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "workbench.editor.centeredLayoutFixedWidth": true,
+  "window.newWindowDimensions": "offset",
+  "application.shellEnvironemntResolutionTimeout": 30,
+  "editor.trimAutoWhiteSpace": false
 }
